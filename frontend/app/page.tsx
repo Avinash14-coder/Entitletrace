@@ -33,7 +33,7 @@ export default function HomePage() {
           </Link>
 
           <Link
-            href="/analyze"
+            href="/analyze?mode=custom"
             className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-semibold text-base flex items-center justify-center gap-2 transition-all"
           >
             <span>Analyze Custom Application</span>

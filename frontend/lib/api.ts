@@ -25,18 +25,18 @@ export interface AnalyzeRequest {
   scheme_id?: string | null;
   language?: string;
   case: CaseInput;
-  remark: str;
+  remark: string;
 }
 
 export interface PrimaryFailure {
-  label: str;
-  display_name: str;
+  label: string;
+  display_name: string;
   probability: number;
-  description?: str;
+  description?: string;
 }
 
 export interface SecondaryFailure {
-  label: str;
+  label: string;
   probability: number;
 }
 

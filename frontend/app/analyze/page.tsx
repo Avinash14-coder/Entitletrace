@@ -23,36 +23,143 @@ import {
   ChevronUp,
   HelpCircle,
   RefreshCw,
-  Search
+  Search,
+  Plus,
+  Trash2,
+  CheckSquare,
+  Square,
+  Calendar,
+  FilePlus,
+  Info,
+  RotateCcw
 } from 'lucide-react';
+
+// Required documents mapping per scheme
+const SCHEME_DOCUMENTS_MAP: Record<string, { name: string; docs: { type: string; label: string; issueDateRequired?: boolean }[] }> = {
+  'SCH_POST_MATRIC_OBC': {
+    name: 'Post Matric Scholarship for OBC Students',
+    docs: [
+      { type: 'income_certificate', label: 'Income Certificate (≤ ₹1.5 Lakh/yr)', issueDateRequired: true },
+      { type: 'caste_certificate', label: 'OBC Caste Certificate', issueDateRequired: false },
+      { type: 'non_creamy_layer', label: 'Non-Creamy Layer Certificate', issueDateRequired: true },
+      { type: 'domicile_certificate', label: 'Maharashtra Domicile Certificate', issueDateRequired: false },
+      { type: 'marksheet', label: 'Previous Year Marksheet', issueDateRequired: false },
+      { type: 'aadhaar', label: 'Aadhaar Card', issueDateRequired: false }
+    ]
+  },
+  'SCH_POST_MATRIC_SC': {
+    name: 'Post Matric Scholarship for SC Students',
+    docs: [
+      { type: 'income_certificate', label: 'Income Certificate (≤ ₹2.5 Lakh/yr)', issueDateRequired: true },
+      { type: 'caste_certificate', label: 'SC Caste Certificate', issueDateRequired: false },
+      { type: 'aadhaar', label: 'Aadhaar Card', issueDateRequired: false },
+      { type: 'marksheet', label: 'Class 10/12 Marksheet', issueDateRequired: false },
+      { type: 'bank_passbook', label: 'Aadhaar Seeded Bank Passbook', issueDateRequired: false }
+    ]
+  },
+  'SCH_MAJHI_LADKI_BAHIN': {
+    name: 'Mukhyamantri Majhi Ladki Bahin Yojana',
+    docs: [
+      { type: 'aadhaar', label: 'Aadhaar Card', issueDateRequired: false },
+      { type: 'domicile_certificate', label: 'Maharashtra Domicile Certificate / Birth Cert', issueDateRequired: false },
+      { type: 'income_certificate', label: 'Income Certificate / Yellow-Orange Ration Card', issueDateRequired: true },
+      { type: 'bank_passbook', label: 'Bank Passbook (Direct Benefit Transfer)', issueDateRequired: false }
+    ]
+  },
+  'SCH_PMAY_URBAN': {
+    name: 'Pradhan Mantri Awas Yojana - Urban',
+    docs: [
+      { type: 'income_certificate', label: 'EWS Income Certificate (≤ ₹3 Lakh/yr)', issueDateRequired: true },
+      { type: 'aadhaar', label: 'Family Aadhaar Cards', issueDateRequired: false },
+      { type: 'domicile_certificate', label: 'Urban Domicile Proof', issueDateRequired: false },
+      { type: 'land_ownership_proof', label: 'Land Ownership Document / Title Deed', issueDateRequired: false },
+      { type: 'no_pucca_house_affidavit', label: 'No Pucca House Affidavit', issueDateRequired: false }
+    ]
+  },
+  'SCH_NMMS': {
+    name: 'National Means-cum-Merit Scholarship Scheme',
+    docs: [
+      { type: 'marksheet', label: 'Class 7 Marksheet (Min 55% marks)', issueDateRequired: false },
+      { type: 'income_certificate', label: 'Parental Income Certificate (≤ ₹3.5 Lakh/yr)', issueDateRequired: true },
+      { type: 'aadhaar', label: 'Student Aadhaar Card', issueDateRequired: false },
+      { type: 'bank_passbook', label: 'Student Bank Passbook', issueDateRequired: false }
+    ]
+  },
+  'SCH_PM_KISAN': {
+    name: 'PM Kisan Samman Nidhi',
+    docs: [
+      { type: 'land_record', label: 'Land Ownership Record (7/12 / Khatauni Extract)', issueDateRequired: false },
+      { type: 'aadhaar', label: 'Farmer Aadhaar Card', issueDateRequired: false },
+      { type: 'bank_passbook', label: 'Aadhaar Seeded Bank Account Details', issueDateRequired: false }
+    ]
+  },
+  'SCH_KANYA_SUMANGALA': {
+    name: 'Mukhyamantri Kanya Sumangala Yojana',
+    docs: [
+      { type: 'birth_certificate', label: 'Girl Child Birth Certificate', issueDateRequired: false },
+      { type: 'domicile_certificate', label: 'UP Domicile Certificate', issueDateRequired: false },
+      { type: 'income_certificate', label: 'Family Income Certificate (≤ ₹3 Lakh/yr)', issueDateRequired: true },
+      { type: 'aadhaar', label: 'Parent Aadhaar Card', issueDateRequired: false },
+      { type: 'bank_passbook', label: 'Bank Passbook', issueDateRequired: false }
+    ]
+  },
+  'SCH_PM_SVANIDHI': {
+    name: "PM Street Vendor's AtmaNirbhar Nidhi",
+    docs: [
+      { type: 'vending_certificate', label: 'Certificate of Vending / Letter of Recommendation (LoR)', issueDateRequired: false },
+      { type: 'aadhaar', label: 'Vendor Aadhaar Card', issueDateRequired: false },
+      { type: 'bank_passbook', label: 'Bank Account Passbook', issueDateRequired: false }
+    ]
+  }
+};
+
+const ALL_DOC_OPTIONS = [
+  { type: 'income_certificate', label: 'Income Certificate' },
+  { type: 'caste_certificate', label: 'Caste Certificate' },
+  { type: 'non_creamy_layer', label: 'Non-Creamy Layer Certificate' },
+  { type: 'domicile_certificate', label: 'Domicile Certificate' },
+  { type: 'aadhaar', label: 'Aadhaar Card' },
+  { type: 'marksheet', label: 'Marksheet' },
+  { type: 'bank_passbook', label: 'Bank Passbook' },
+  { type: 'birth_certificate', label: 'Birth Certificate' },
+  { type: 'land_record', label: 'Land Record (7/12 Extract)' },
+  { type: 'vending_certificate', label: 'Vending Certificate / LoR' },
+  { type: 'uploaded_document', label: 'Other Document' }
+];
+
+interface ManagedDocItem {
+  type: string;
+  label: string;
+  submitted: boolean;
+  issue_date: string;
+  isSchemeRequired: boolean;
+  text?: string;
+}
 
 export default function AnalyzePage() {
   const searchParams = useSearchParams();
   const demoParam = searchParams.get('demo');
+  const modeParam = searchParams.get('mode');
 
   const [schemes, setSchemes] = useState<Scheme[]>([]);
   const [selectedSchemeId, setSelectedSchemeId] = useState<string>('SCH_POST_MATRIC_OBC');
   const [lang, setLang] = useState<string>('en');
 
   // Case Input Form State
-  const [applicantName, setApplicantName] = useState('Priya Patil');
+  const [applicantName, setApplicantName] = useState('');
   const [age, setAge] = useState<number>(21);
-  const [annualIncome, setAnnualIncome] = useState<number>(320000);
+  const [annualIncome, setAnnualIncome] = useState<number>(0);
   const [category, setCategory] = useState('OBC');
-  const [state, setState] = useState('Maharashtra');
-  const [remark, setRemark] = useState('Income proof not valid.');
+  const [state, setState] = useState('');
+  const [remark, setRemark] = useState('');
 
-  // Submitted Documents State
-  const [docType, setDocType] = useState('income_certificate');
-  const [docIssueDate, setDocIssueDate] = useState('2025-05-10'); // 14 months ago
-  const [docList, setDocList] = useState<DocumentItem[]>([
-    { type: 'income_certificate', issue_date: '2025-05-10', text: 'Income Certificate issued 14 months ago for ₹3,20,000' },
-    { type: 'caste_certificate', issue_date: '2025-01-15', text: 'OBC Caste Certificate' },
-    { type: 'non_creamy_layer', issue_date: '2025-04-01', text: 'Valid NCL Certificate' },
-    { type: 'domicile_certificate', issue_date: '2024-10-10', text: 'Maharashtra Domicile' },
-    { type: 'marksheet', issue_date: '2025-06-01', text: 'Passed Marksheet' },
-    { type: 'aadhaar', issue_date: '2022-01-01', text: 'Aadhaar Card' }
-  ]);
+  // Managed Document List State
+  const [managedDocs, setManagedDocs] = useState<ManagedDocItem[]>([]);
+  
+  // Add Extra Document state
+  const [newDocType, setNewDocType] = useState('birth_certificate');
+  const [newDocIssueDate, setNewDocIssueDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [duplicateWarning, setDuplicateWarning] = useState<string | null>(null);
 
   // Loading & Result States
   const [loading, setLoading] = useState(false);
@@ -61,6 +168,7 @@ export default function AnalyzePage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [showTechnicalDetails, setShowTechnicalDetails] = useState(false);
 
+  // Load Scheme List and set mode
   useEffect(() => {
     fetchSchemes({ limit: 50 })
       .then((data) => setSchemes(data.schemes))
@@ -68,9 +176,65 @@ export default function AnalyzePage() {
 
     if (demoParam === 'worked') {
       loadWorkedDemo();
+    } else if (demoParam === 'missing') {
+      loadMissingDocDemo();
+    } else if (demoParam === 'domicile') {
+      loadLadkiBahinDemo();
+    } else {
+      loadFreshCustomForm();
     }
-  }, [demoParam]);
+  }, [demoParam, modeParam]);
 
+  // When selected scheme changes, update document requirements list
+  const handleSchemeChange = (schemeId: string) => {
+    setSelectedSchemeId(schemeId);
+    syncDocsForScheme(schemeId);
+  };
+
+  const syncDocsForScheme = (schemeId: string, customDates?: Record<string, string>) => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    const mapInfo = SCHEME_DOCUMENTS_MAP[schemeId];
+    
+    let requiredDocs: { type: string; label: string }[] = [];
+    if (mapInfo) {
+      requiredDocs = mapInfo.docs;
+    } else {
+      // Default fallback if scheme is auto-detect or unknown
+      requiredDocs = [
+        { type: 'income_certificate', label: 'Income Certificate' },
+        { type: 'caste_certificate', label: 'Caste Certificate' },
+        { type: 'domicile_certificate', label: 'Domicile Certificate' },
+        { type: 'aadhaar', label: 'Aadhaar Card' }
+      ];
+    }
+
+    const initialDocs: ManagedDocItem[] = requiredDocs.map((d) => ({
+      type: d.type,
+      label: d.label,
+      submitted: true,
+      issue_date: customDates?.[d.type] || todayStr,
+      isSchemeRequired: true
+    }));
+
+    setManagedDocs(initialDocs);
+    setDuplicateWarning(null);
+  };
+
+  // Clean Custom Form Loader
+  const loadFreshCustomForm = () => {
+    setSelectedSchemeId('SCH_POST_MATRIC_OBC');
+    setApplicantName('');
+    setAge(21);
+    setAnnualIncome(0);
+    setCategory('OBC');
+    setState('');
+    setRemark('');
+    setResult(null);
+    setErrorMsg(null);
+    syncDocsForScheme('SCH_POST_MATRIC_OBC');
+  };
+
+  // Demo Loaders
   const loadWorkedDemo = () => {
     setSelectedSchemeId('SCH_POST_MATRIC_OBC');
     setApplicantName('Priya Patil');
@@ -79,19 +243,19 @@ export default function AnalyzePage() {
     setCategory('OBC');
     setState('Maharashtra');
     setRemark('Income proof not valid.');
-    
-    // 14 months ago date calculation
+
+    // 14 months ago date calculation (~420 days ago)
     const d = new Date();
     d.setMonth(d.getMonth() - 14);
     const date14MonthsAgo = d.toISOString().split('T')[0];
 
-    setDocList([
-      { type: 'income_certificate', issue_date: date14MonthsAgo, text: 'Income Certificate issued 14 months ago for ₹3,20,000' },
-      { type: 'caste_certificate', issue_date: '2025-01-15', text: 'OBC Caste Certificate' },
-      { type: 'non_creamy_layer', issue_date: '2025-04-01', text: 'Valid NCL Certificate' },
-      { type: 'domicile_certificate', issue_date: '2024-10-10', text: 'Maharashtra Domicile' },
-      { type: 'marksheet', issue_date: '2025-06-01', text: 'Passed Marksheet' },
-      { type: 'aadhaar', issue_date: '2022-01-01', text: 'Aadhaar Card' }
+    setManagedDocs([
+      { type: 'income_certificate', label: 'Income Certificate (≤ ₹1.5 Lakh/yr)', submitted: true, issue_date: date14MonthsAgo, isSchemeRequired: true, text: 'Income Certificate issued 14 months ago for ₹3,20,000' },
+      { type: 'caste_certificate', label: 'OBC Caste Certificate', submitted: true, issue_date: '2025-01-15', isSchemeRequired: true },
+      { type: 'non_creamy_layer', label: 'Non-Creamy Layer Certificate', submitted: true, issue_date: '2025-04-01', isSchemeRequired: true },
+      { type: 'domicile_certificate', label: 'Maharashtra Domicile Certificate', submitted: true, issue_date: '2024-10-10', isSchemeRequired: true },
+      { type: 'marksheet', label: 'Previous Year Marksheet', submitted: true, issue_date: '2025-06-01', isSchemeRequired: true },
+      { type: 'aadhaar', label: 'Aadhaar Card', submitted: true, issue_date: '2022-01-01', isSchemeRequired: true }
     ]);
   };
 
@@ -103,10 +267,13 @@ export default function AnalyzePage() {
     setCategory('SC');
     setState('Maharashtra');
     setRemark('Application rejected: caste certificate missing.');
-    setDocList([
-      { type: 'income_certificate', issue_date: '2026-01-10', text: 'Valid Income Certificate' },
-      { type: 'aadhaar', issue_date: '2023-01-01', text: 'Aadhaar Card' },
-      { type: 'marksheet', issue_date: '2025-06-01', text: 'Marksheet' }
+
+    setManagedDocs([
+      { type: 'income_certificate', label: 'Income Certificate (≤ ₹2.5 Lakh/yr)', submitted: true, issue_date: '2026-01-10', isSchemeRequired: true },
+      { type: 'caste_certificate', label: 'SC Caste Certificate', submitted: false, issue_date: '', isSchemeRequired: true },
+      { type: 'aadhaar', label: 'Aadhaar Card', submitted: true, issue_date: '2023-01-01', isSchemeRequired: true },
+      { type: 'marksheet', label: 'Class 10/12 Marksheet', submitted: true, issue_date: '2025-06-01', isSchemeRequired: true },
+      { type: 'bank_passbook', label: 'Aadhaar Seeded Bank Passbook', submitted: false, issue_date: '', isSchemeRequired: true }
     ]);
   };
 
@@ -118,36 +285,104 @@ export default function AnalyzePage() {
     setCategory('General');
     setState('Gujarat');
     setRemark('Applicant is not a permanent resident of Maharashtra.');
-    setDocList([
-      { type: 'aadhaar', issue_date: '2022-01-01', text: 'Aadhaar Card' },
-      { type: 'income_certificate', issue_date: '2026-02-01', text: 'Income Certificate' },
-      { type: 'bank_passbook', issue_date: '2024-01-01', text: 'Bank Passbook' }
+
+    setManagedDocs([
+      { type: 'aadhaar', label: 'Aadhaar Card', submitted: true, issue_date: '2022-01-01', isSchemeRequired: true },
+      { type: 'domicile_certificate', label: 'Maharashtra Domicile Certificate / Birth Cert', submitted: true, issue_date: '2024-05-10', isSchemeRequired: true },
+      { type: 'income_certificate', label: 'Income Certificate / Yellow-Orange Ration Card', submitted: true, issue_date: '2026-02-01', isSchemeRequired: true },
+      { type: 'bank_passbook', label: 'Bank Passbook (Direct Benefit Transfer)', submitted: true, issue_date: '2024-01-01', isSchemeRequired: true }
     ]);
   };
 
-  const handleAddDocument = () => {
-    if (!docType) return;
-    setDocList([...docList, { type: docType, issue_date: docIssueDate, text: `${docType.replace('_', ' ')} issued ${docIssueDate}` }]);
+  // Document Checklist Actions
+  const toggleDocSubmitted = (index: number) => {
+    const updated = [...managedDocs];
+    updated[index].submitted = !updated[index].submitted;
+    setManagedDocs(updated);
   };
 
-  const handleRemoveDocument = (index: number) => {
-    setDocList(docList.filter((_, i) => i !== index));
+  const updateDocIssueDate = (index: number, newDate: string) => {
+    const updated = [...managedDocs];
+    updated[index].issue_date = newDate;
+    setManagedDocs(updated);
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAddExtraDocument = () => {
+    setDuplicateWarning(null);
+
+    // Check if docType already exists in managedDocs list
+    const exists = managedDocs.some((d) => d.type === newDocType);
+    if (exists) {
+      const docObj = ALL_DOC_OPTIONS.find((opt) => opt.type === newDocType);
+      const name = docObj ? docObj.label : newDocType.replace(/_/g, ' ');
+      setDuplicateWarning(`"${name}" is already in your document checklist below! You can toggle its status or update its date directly.`);
+      return;
+    }
+
+    const docObj = ALL_DOC_OPTIONS.find((opt) => opt.type === newDocType);
+    const label = docObj ? docObj.label : newDocType.replace(/_/g, ' ');
+
+    setManagedDocs([
+      ...managedDocs,
+      {
+        type: newDocType,
+        label: label,
+        submitted: true,
+        issue_date: newDocIssueDate || new Date().toISOString().split('T')[0],
+        isSchemeRequired: false
+      }
+    ]);
+  };
+
+  const handleRemoveDoc = (index: number) => {
+    setManagedDocs(managedDocs.filter((_, i) => i !== index));
+    setDuplicateWarning(null);
+  };
+
+  // Upload File handler
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, targetDocIndex?: number) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setExtracting(true);
     try {
       const extResult = await extractDocument(file);
-      setDocList([
-        ...docList,
-        {
-          type: file.name.toLowerCase().includes('income') ? 'income_certificate' : 'uploaded_document',
-          issue_date: new Date().toISOString().split('T')[0],
-          text: extResult.full_text
+      
+      if (targetDocIndex !== undefined && targetDocIndex >= 0 && targetDocIndex < managedDocs.length) {
+        // Attach text to specific document line
+        const updated = [...managedDocs];
+        updated[targetDocIndex].submitted = true;
+        updated[targetDocIndex].text = extResult.full_text;
+        setManagedDocs(updated);
+      } else {
+        // Find best match or add as new uploaded document
+        const fname = file.name.toLowerCase();
+        let matchedType = 'uploaded_document';
+        if (fname.includes('income')) matchedType = 'income_certificate';
+        else if (fname.includes('caste')) matchedType = 'caste_certificate';
+        else if (fname.includes('domicile')) matchedType = 'domicile_certificate';
+        else if (fname.includes('marksheet')) matchedType = 'marksheet';
+        else if (fname.includes('aadhaar')) matchedType = 'aadhaar';
+
+        const existingIdx = managedDocs.findIndex((d) => d.type === matchedType);
+        if (existingIdx >= 0) {
+          const updated = [...managedDocs];
+          updated[existingIdx].submitted = true;
+          updated[existingIdx].text = extResult.full_text;
+          setManagedDocs(updated);
+        } else {
+          setManagedDocs([
+            ...managedDocs,
+            {
+              type: matchedType,
+              label: file.name,
+              submitted: true,
+              issue_date: new Date().toISOString().split('T')[0],
+              isSchemeRequired: false,
+              text: extResult.full_text
+            }
+          ]);
         }
-      ]);
+      }
     } catch (err: any) {
       alert("Failed to extract document: " + err.message);
     } finally {
@@ -155,10 +390,20 @@ export default function AnalyzePage() {
     }
   };
 
+  // Handle Submit Analysis
   const handleAnalyze = async () => {
     setLoading(true);
     setErrorMsg(null);
     setResult(null);
+
+    // Filter only submitted documents for backend submission
+    const submittedDocuments: DocumentItem[] = managedDocs
+      .filter((d) => d.submitted)
+      .map((d) => ({
+        type: d.type,
+        issue_date: d.issue_date || undefined,
+        text: d.text || `${d.label} submitted`
+      }));
 
     try {
       const payload = {
@@ -172,7 +417,7 @@ export default function AnalyzePage() {
             category: category,
             state: state
           },
-          documents: docList
+          documents: submittedDocuments
         },
         remark: remark
       };
@@ -185,6 +430,8 @@ export default function AnalyzePage() {
       setLoading(false);
     }
   };
+
+  const selectedSchemeObj = SCHEME_DOCUMENTS_MAP[selectedSchemeId];
 
   return (
     <div className="space-y-8 py-2">
@@ -201,14 +448,22 @@ export default function AnalyzePage() {
           </p>
         </div>
 
-        {/* Demo Prefill Buttons */}
+        {/* Demo Prefill & Reset Bar */}
         <div className="flex flex-wrap gap-2">
+          <button
+            onClick={loadFreshCustomForm}
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 transition-colors flex items-center gap-1.5"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-emerald-500" />
+            <span>Clear / Custom Form</span>
+          </button>
+
           <button
             onClick={loadWorkedDemo}
             className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 hover:bg-emerald-200 transition-colors flex items-center gap-1.5"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Acceptance Demo Case (Income & Expired)</span>
+            <span>Demo Case (Income & Expired)</span>
           </button>
 
           <button
@@ -240,7 +495,7 @@ export default function AnalyzePage() {
             </label>
             <select
               value={selectedSchemeId}
-              onChange={(e) => setSelectedSchemeId(e.target.value)}
+              onChange={(e) => handleSchemeChange(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-semibold text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               <option value="DETECT_AUTO">🔍 Auto-Detect Scheme from Remark</option>
@@ -250,6 +505,11 @@ export default function AnalyzePage() {
                 </option>
               ))}
             </select>
+            {selectedSchemeObj && (
+              <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
+                ✓ Dynamic document checklist loaded for {selectedSchemeObj.name}
+              </p>
+            )}
           </div>
 
           {/* Step 2: Applicant Case Details */}
@@ -263,6 +523,7 @@ export default function AnalyzePage() {
                 <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Applicant Name</label>
                 <input
                   type="text"
+                  placeholder="e.g. Avinash Pawar"
                   value={applicantName}
                   onChange={(e) => setApplicantName(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
@@ -273,8 +534,9 @@ export default function AnalyzePage() {
                 <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Age (Years)</label>
                 <input
                   type="number"
-                  value={age}
+                  value={age || ''}
                   onChange={(e) => setAge(Number(e.target.value))}
+                  placeholder="e.g. 21"
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
                 />
               </div>
@@ -283,8 +545,9 @@ export default function AnalyzePage() {
                 <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Annual Income (₹)</label>
                 <input
                   type="number"
-                  value={annualIncome}
+                  value={annualIncome || ''}
                   onChange={(e) => setAnnualIncome(Number(e.target.value))}
+                  placeholder="e.g. 180000"
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-semibold text-emerald-600 dark:text-emerald-400"
                 />
               </div>
@@ -308,6 +571,7 @@ export default function AnalyzePage() {
                 <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">State of Domicile</label>
                 <input
                   type="text"
+                  placeholder="e.g. Maharashtra"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
@@ -329,66 +593,158 @@ export default function AnalyzePage() {
               />
             </div>
 
-            {/* Submitted Documents Section */}
-            <div className="border-t border-slate-200 dark:border-slate-800 pt-3 space-y-2">
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
-                Submitted Documents & Issue Dates
-              </label>
-
-              <div className="flex gap-2">
-                <select
-                  value={docType}
-                  onChange={(e) => setDocType(e.target.value)}
-                  className="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs"
-                >
-                  <option value="income_certificate">Income Certificate</option>
-                  <option value="caste_certificate">Caste Certificate</option>
-                  <option value="non_creamy_layer">Non-Creamy Layer</option>
-                  <option value="domicile_certificate">Domicile Certificate</option>
-                  <option value="aadhaar">Aadhaar Card</option>
-                  <option value="marksheet">Marksheet</option>
-                  <option value="bank_passbook">Bank Passbook</option>
-                  <option value="birth_certificate">Birth Certificate</option>
-                </select>
-
-                <input
-                  type="date"
-                  value={docIssueDate}
-                  onChange={(e) => setDocIssueDate(e.target.value)}
-                  className="px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs"
-                />
-
-                <button
-                  type="button"
-                  onClick={handleAddDocument}
-                  className="px-3 py-1.5 bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg"
-                >
-                  + Add
-                </button>
-              </div>
-
-              {/* Upload File button */}
-              <div className="flex items-center gap-2 pt-1">
-                <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700">
-                  <Upload className="w-3.5 h-3.5 text-slate-500" />
-                  <span>{extracting ? 'Extracting...' : 'Upload Doc (PDF/DOCX/TXT)'}</span>
-                  <input type="file" accept=".pdf,.docx,.txt" onChange={handleFileUpload} className="hidden" />
+            {/* Step 3: Scheme Documents Checklist */}
+            <div className="border-t border-slate-200 dark:border-slate-800 pt-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                  Step 3. Scheme Documents Checklist
                 </label>
+                <span className="text-[11px] text-slate-400 font-medium">
+                  {managedDocs.filter(d => d.submitted).length} of {managedDocs.length} Submitted
+                </span>
               </div>
 
-              {/* Document Pills */}
-              <div className="flex flex-wrap gap-1.5 pt-2">
-                {docList.map((doc, idx) => (
-                  <span key={idx} className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-300">
-                    <FileText className="w-3 h-3 text-emerald-500" />
-                    <span>{doc.type.replace('_', ' ')} ({doc.issue_date || 'No Date'})</span>
-                    <button onClick={() => handleRemoveDocument(idx)} className="text-slate-400 hover:text-red-500 font-bold ml-1">×</button>
-                  </span>
+              {/* Explanatory Info Banner */}
+              <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 text-blue-900 dark:text-blue-200 text-xs space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-blue-800 dark:text-blue-300">
+                  <Info className="w-4 h-4 text-blue-500" />
+                  <span>How to verify documents (2 flexible modes):</span>
+                </div>
+                <div className="leading-relaxed text-[11px] space-y-1">
+                  <p>
+                    • <strong>Option A (Fast Checklist Mode)</strong>: Check <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">[✓]</span> which documents the applicant submitted and pick their issue dates. <em>No PDF upload required!</em>
+                  </p>
+                  <p>
+                    • <strong>Option B (File Extraction Mode)</strong>: Click <Upload className="inline w-3 h-3 text-blue-600 dark:text-blue-400"/> on any card to upload actual PDF/DOCX files. EntitleTrace will parse text & dates automatically!
+                  </p>
+                </div>
+              </div>
+
+              {/* Dynamic Document List Items */}
+              <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+                {managedDocs.map((doc, idx) => (
+                  <div
+                    key={idx}
+                    className={`p-3 rounded-xl border transition-all ${
+                      doc.submitted
+                        ? 'bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700'
+                        : 'bg-rose-50/50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50 opacity-80'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      {/* Checkbox & Title */}
+                      <button
+                        type="button"
+                        onClick={() => toggleDocSubmitted(idx)}
+                        className="flex items-start gap-2 text-left"
+                      >
+                        {doc.submitted ? (
+                          <CheckSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+                        ) : (
+                          <Square className="w-4 h-4 text-rose-500 mt-0.5 shrink-0" />
+                        )}
+                        <div>
+                          <div className={`text-xs font-bold ${doc.submitted ? 'text-slate-900 dark:text-white' : 'text-rose-700 dark:text-rose-300 line-through'}`}>
+                            {doc.label}
+                          </div>
+                          <div className="text-[10px] text-slate-400 font-mono">
+                            Status: {doc.submitted ? 'Submitted' : 'Omitted / Missing'} {doc.isSchemeRequired && '• Mandatory'}
+                          </div>
+                        </div>
+                      </button>
+
+                      {/* Actions: File Upload & Delete */}
+                      <div className="flex items-center gap-1 shrink-0">
+                        <label className="cursor-pointer p-1 text-slate-500 hover:text-emerald-500 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" title="Upload Document File (PDF/DOCX/TXT)">
+                          <Upload className="w-3.5 h-3.5" />
+                          <input
+                            type="file"
+                            accept=".pdf,.docx,.txt"
+                            onChange={(e) => handleFileUpload(e, idx)}
+                            className="hidden"
+                          />
+                        </label>
+
+                        {!doc.isSchemeRequired && (
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveDoc(idx)}
+                            className="p-1 text-slate-400 hover:text-rose-500 rounded"
+                            title="Remove Document"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Issue Date Input (Shown if submitted) */}
+                    {doc.submitted && (
+                      <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between gap-2 text-xs">
+                        <span className="text-[11px] text-slate-500 font-medium flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-slate-400" />
+                          Issue Date:
+                        </span>
+                        <input
+                          type="date"
+                          value={doc.issue_date}
+                          onChange={(e) => updateDocIssueDate(idx, e.target.value)}
+                          className="px-2 py-1 rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200"
+                        />
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
+
+              {/* Duplicate Warning Notification */}
+              {duplicateWarning && (
+                <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-2">
+                  <Info className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>{duplicateWarning}</span>
+                </div>
+              )}
+
+              {/* Add Extra Document Section */}
+              <div className="pt-2 border-t border-slate-200 dark:border-slate-800 space-y-2">
+                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+                  + Add Additional Optional Document
+                </span>
+
+                <div className="flex gap-2">
+                  <select
+                    value={newDocType}
+                    onChange={(e) => setNewDocType(e.target.value)}
+                    className="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs"
+                  >
+                    {ALL_DOC_OPTIONS.map((opt) => (
+                      <option key={opt.type} value={opt.type}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+
+                  <input
+                    type="date"
+                    value={newDocIssueDate}
+                    onChange={(e) => setNewDocIssueDate(e.target.value)}
+                    className="px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={handleAddExtraDocument}
+                    className="px-3 py-1.5 bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold rounded-lg flex items-center gap-1 shrink-0"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>Add</span>
+                  </button>
+                </div>
+              </div>
+
             </div>
 
-            {/* Submit Button */}
+            {/* Submit Analysis Button */}
             <button
               onClick={handleAnalyze}
               disabled={loading}
@@ -419,7 +775,7 @@ export default function AnalyzePage() {
               </div>
               <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">Ready to Analyze Application</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-                Click <strong>"Try Acceptance Demo Case"</strong> above or fill in the details on the left to generate evidence-backed failure explanation.
+                Click <strong>"Demo Case"</strong> above or fill in custom applicant details on the left to run deterministic rule analysis & clause evidence matching.
               </p>
             </div>
           )}
@@ -520,7 +876,7 @@ export default function AnalyzePage() {
                     <FileText className="w-5 h-5 text-blue-500" />
                     <span>Retrieved Scheme Clause Evidence</span>
                   </span>
-                  <span className="text-xs text-slate-400 font-normal">Ranked by BGE-M3 + BM25 RRF Score</span>
+                  <span className="text-xs text-slate-400 font-normal">Ranked by BM25 + TF-IDF RRF Score</span>
                 </h3>
 
                 {result.linked_clauses.length === 0 ? (
