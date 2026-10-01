@@ -1,0 +1,27 @@
+# EntitleTrace Application Settings
+
+app:
+  name: "EntitleTrace"
+  version: "1.0.0"
+  env: "development"
+  debug: true
+
+nlp:
+  use_model_ner: false
+  use_model_classifier: false
+  use_reranker: false
+  dense_model_name: "BAAI/bge-m3"
+  muril_model_name: "google/muril-base-cased"
+  default_top_k: 5
+
+paths:
+  raw_dataset: "data/raw/myscheme.csv"
+  processed_schemes: "data/processed/schemes.parquet"
+  processed_clauses: "data/processed/clauses.parquet"
+  sqlite_db: "sqlite:///data/entitletrace.db"
+  synthetic_cases: "data/synthetic/cases.jsonl"
+  index_dir: "data/index"
+  models_dir: "models"
+
+rules:
+  default_doc_max_age_days: 365

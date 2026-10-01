@@ -1,0 +1,122 @@
+# EntitleTrace Failure Taxonomy Configuration
+
+taxonomies:
+  missing_document:
+    id: "missing_document"
+    display_name:
+      en: "Missing Required Document"
+      hi: "आवश्यक दस्तावेज गायब/अनुपलब्ध"
+      mr: "आवश्यक कागदपत्रे अपूर्ण / गहाळ"
+    description: "One or more mandatory documents required for the scheme were not submitted with the application."
+    action_template:
+      en: "Submit the missing document(s): {{missing_docs}}. Ensure clear scans of official documents are attached."
+      hi: "लापता दस्तावेज जमा करें: {{missing_docs}}। सुनिश्चित करें कि आधिकारिक दस्तावेजों की स्पष्ट प्रति संलग्न है।"
+      mr: "गहाळ असलेले कागदपत्र जमा करा: {{missing_docs}}. अधिकृत कागदपत्रांची स्पष्ट डिजिटल प्रत अपलोड करा."
+
+  expired_or_invalid_document:
+    id: "expired_or_invalid_document"
+    display_name:
+      en: "Expired or Invalid Document"
+      hi: "समाप्त या अमान्य दस्तावेज"
+      mr: "मुदत संपलेली किंवा अमान्य कागदपत्रे"
+    description: "Submitted document has passed its official validity period or is legally invalid."
+    action_template:
+      en: "Obtain a fresh, renewed {{document_type}} issued within the allowed validity period (maximum {{max_age_days}} days old)."
+      hi: "अनुमत वैधता अवधि (अधिकतम {{max_age_days}} दिन पुराने) के भीतर जारी नया {{document_type}} प्राप्त करें।"
+      mr: "ग्राह्य कालावधीच्या आत (जास्तीत जास्त {{max_age_days}} दिवस जुने) जारी केलेले नवीन {{document_type}} मिळवा आणि पुनर्रचना करा."
+
+  document_mismatch:
+    id: "document_mismatch"
+    display_name:
+      en: "Document Mismatch (Name/DOB/Details)"
+      hi: "दस्तावेज विसंगति (नाम/जन्मतिथि/विवरण)"
+      mr: "कागदपत्रांमधील नावाचा किंवा माहितीचा तफावत"
+    description: "Discrepancy in applicant name, date of birth, address or identifier across submitted identity documents."
+    action_template:
+      en: "Correct personal details on {{mismatched_field}} to ensure exact match across Aadhaar, Income Certificate, and Application Form."
+      hi: "आधार, आय प्रमाण पत्र और आवेदन पत्र में सटीक मिलान सुनिश्चित करने के लिए {{mismatched_field}} पर व्यक्तिगत विवरण सही करें।"
+      mr: "आधार कार्ड, उत्पन्न दाखला आणि अर्ज फॉर्ममधील माहितीचे तंतोतंत साम्य असण्यासाठी {{mismatched_field}} दुरुस्त करा."
+
+  eligibility_income:
+    id: "eligibility_income"
+    display_name:
+      en: "Income Ceiling Exceeded"
+      hi: "आय सीमा से अधिक"
+      mr: "वार्षिक उत्पन्न मर्यादेपेक्षा जास्त"
+    description: "Applicant annual income exceeds the maximum threshold prescribed under the scheme eligibility rules."
+    action_template:
+      en: "Re-check family annual income ceiling. Scheme requires annual income below ₹{{income_limit}}. If income proof is incorrect, submit updated official Income Certificate."
+      hi: "पारिवारिक वार्षिक आय सीमा की पुन: जांच करें। योजना के लिए आय ₹{{income_limit}} से कम होनी चाहिए। यदि प्रमाण गलत है, तो अद्यतन आय प्रमाण पत्र प्रस्तुत करें।"
+      mr: "कुटुंबाच्या वार्षिक उत्पन्न मर्यादेची पडताळणी करा. योजनेनुसार उत्पन्न ₹{{income_limit}} पेक्षा कमी असणे आवश्यक आहे. जर दाखला चुकीचा असेल तर अद्ययावत दाखला सादर करा."
+
+  eligibility_age:
+    id: "eligibility_age"
+    display_name:
+      en: "Age Limit Criteria Not Met"
+      hi: "आयु सीमा मानदंड पूरा नहीं हुआ"
+      mr: "वय मर्यादा निकष पूर्ण होत नाही"
+    description: "Applicant age does not satisfy the specified minimum or maximum age limit of the scheme."
+    action_template:
+      en: "Verify applicant age against Birth Certificate/Aadhaar. Scheme requires age between {{min_age}} and {{max_age}} years."
+      hi: "जन्म प्रमाण पत्र/आधार के अनुसार आवेदक की आयु सत्यापित करें। योजना के लिए आयु {{min_age}} से {{max_age}} वर्ष के बीच होनी चाहिए।"
+      mr: "जन्म दाखला किंवा आधार कार्डानुसार वयाची पडताळणी करा. योजनेसाठी वय {{min_age}} ते {{max_age}} वर्षे असणे बंधनकारक आहे."
+
+  eligibility_category_or_residence:
+    id: "eligibility_category_or_residence"
+    display_name:
+      en: "Category / Domicile Criterion Not Met"
+      hi: "श्रेणी / निवास मानदंड पूरा नहीं हुआ"
+      mr: "प्रवर्ग किंवा अधिवास (डोमिसाईल) निकष बसत नाही"
+    description: "Applicant category (SC/ST/OBC/EWS) or domicile state does not match the target beneficiary criteria."
+    action_template:
+      en: "Ensure valid Domicile Certificate for {{required_state}} or Caste Certificate for {{required_category}} is provided."
+      hi: "{{required_state}} के लिए वैध निवास प्रमाण पत्र या {{required_category}} के लिए जाति प्रमाण पत्र प्रदान करना सुनिश्चित करें।"
+      mr: "{{required_state}} साठी वैध अधिवास दाखला किंवा {{required_category}} साठी जात प्रमाणपत्र जोडल्याचे निश्चित करा."
+
+  incomplete_or_incorrect_form:
+    id: "incomplete_or_incorrect_form"
+    display_name:
+      en: "Incomplete or Incorrect Application Form"
+      hi: "अपूर्ण या गलत आवेदन पत्र"
+      mr: "अपूर्ण किंवा चुकीचा अर्ज फॉर्म"
+    description: "Mandatory fields in application form were left blank, entered improperly, or contained calculation errors."
+    action_template:
+      en: "Fill out all required fields: {{fields}} and re-verify application summary before submission."
+      hi: "सभी आवश्यक फ़ील्ड भरें: {{fields}} और सबमिशन से पहले आवेदन सारांश को पुन: सत्यापित करें।"
+      mr: "सर्व अनिवार्य रकाने भरा: {{fields}} आणि अर्ज सादर करण्यापूर्वी पुन्हा एकदा तपासा."
+
+  deadline_or_process_error:
+    id: "deadline_or_process_error"
+    display_name:
+      en: "Application Deadline Passed or Submission Channel Error"
+      hi: "आवेदन की अंतिम तिथि बीत गई या जमा प्रक्रिया त्रुटि"
+      mr: "अर्जाची अंतिम मुदत उलटली किंवा चुकीच्या पद्धतीने अर्ज दाखल"
+    description: "Application was submitted after the scheme portal cutoff date or submitted via an incorrect agency/portal."
+    action_template:
+      en: "Check next academic/financial cycle opening dates. Submit application through the designated official portal prior to cutoff."
+      hi: "अगले शैक्षणिक/वित्तीय चक्र की आरंभ तिथियों की जांच करें। समय सीमा से पहले निर्दिष्ट आधिकारिक पोर्टल के माध्यम से आवेदन जमा करें।"
+      mr: "पुढील शैक्षणिक किंवा आर्थिक वर्षाच्या अर्जाची तारीख तपासा आणि अधिकृत पोर्टलवरूनच मुदतीपूर्वी अर्ज करा."
+
+  duplicate_application:
+    id: "duplicate_application"
+    display_name:
+      en: "Duplicate Application Detected"
+      hi: "दोहरा/डुप्‍लीकेट आवेदन मिला"
+      mr: "दुप्पट (Duplicate) अर्ज आढळला"
+    description: "An active or previously processed application under the same scheme exists for this Aadhaar/Member ID."
+    action_template:
+      en: "Track status of your existing application (ID: {{existing_id}}) on the portal rather than creating a fresh submission."
+      hi: "नया आवेदन बनाने के बजाय पोर्टल पर अपने मौजूदा आवेदन (ID: {{existing_id}}) की स्थिति ट्रैक करें।"
+      mr: "नवीन अर्ज करण्याऐवजी आपल्या हयात अर्जाची (क्रमांक: {{existing_id}}) स्थिती पोर्टलवर तपासा."
+
+  verification_pending_or_unspecified:
+    id: "verification_pending_or_unspecified"
+    display_name:
+      en: "Unspecified Administrative Remark or Pending Physical Verification"
+      hi: "अनिर्दिष्ट प्रशासनिक टिप्पणी या भौतिक सत्यापन लंबित"
+      mr: "अस्पष्ट प्रशासकीय टिप्पणी किंवा प्रत्यक्ष पडताळणी प्रलंबित"
+    description: "Rejection remark is generic or pending verification by district authority/institution."
+    action_template:
+      en: "Contact scheme nodal officer or college scholarship department with application reference to seek exact missing requirements."
+      hi: "सटीक कमी जानने के लिए आवेदन संदर्भ के साथ योजना के नोडल अधिकारी या कॉलेज छात्रवृत्ति विभाग से संपर्क करें।"
+      mr: "स्पष्ट कारणाचा शोध घेण्यासाठी अर्जाच्या क्रमांकासह संबंधित नोडल अधिकारी किंवा कॉलेजच्या शिष्यवृत्ती विभागाशी संपर्क साधा."

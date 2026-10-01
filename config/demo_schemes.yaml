@@ -1,0 +1,197 @@
+# Curated Rules for Demo Welfare Schemes
+
+demo_schemes:
+  - scheme_id: "SCH_POST_MATRIC_SC"
+    name: "Post Matric Scholarship for SC Students"
+    rules:
+      - id: "sc_income_limit"
+        type: "numeric_max"
+        field: "annual_income"
+        value: 250000
+        clause_ref: "SCH_POST_MATRIC_SC_ELIG_3"
+        description: "Parental annual income from all sources must not exceed ₹2,50,000"
+      - id: "sc_age_range"
+        type: "numeric_range"
+        field: "age"
+        min: 16
+        max: 35
+        clause_ref: "SCH_POST_MATRIC_SC_ELIG_5"
+        description: "Applicant age must be between 16 and 35 years"
+      - id: "sc_category_req"
+        type: "category_in"
+        field: "category"
+        allowed: ["SC"]
+        clause_ref: "SCH_POST_MATRIC_SC_ELIG_1"
+        description: "Applicant must belong to Scheduled Caste (SC) category"
+      - id: "sc_required_docs"
+        type: "documents_present"
+        documents: ["income_certificate", "caste_certificate", "aadhaar", "marksheet", "bank_passbook"]
+        clause_ref: "SCH_POST_MATRIC_SC_DOCS_ALL"
+        description: "Must provide income certificate, caste certificate, aadhaar, marksheet, and bank passbook"
+      - id: "sc_income_cert_validity"
+        type: "max_age_days"
+        document: "income_certificate"
+        value: 365
+        clause_ref: "SCH_POST_MATRIC_SC_DOCS_1"
+        description: "Income certificate must be issued within 365 days of application"
+
+  - scheme_id: "SCH_MAJHI_LADKI_BAHIN"
+    name: "Mukhyamantri Majhi Ladki Bahin Yojana"
+    rules:
+      - id: "mmlby_income_limit"
+        type: "numeric_max"
+        field: "annual_income"
+        value: 250000
+        clause_ref: "SCH_MAJHI_LADKI_BAHIN_ELIG_3"
+        description: "Family annual income from all sources must not exceed ₹2,50,000"
+      - id: "mmlby_age_range"
+        type: "numeric_range"
+        field: "age"
+        min: 21
+        max: 65
+        clause_ref: "SCH_MAJHI_LADKI_BAHIN_ELIG_2"
+        description: "Applicant woman must be between 21 and 65 years of age"
+      - id: "mmlby_state_req"
+        type: "state_in"
+        field: "state"
+        allowed: ["Maharashtra", "MH"]
+        clause_ref: "SCH_MAJHI_LADKI_BAHIN_ELIG_1"
+        description: "Applicant must be a permanent resident of Maharashtra"
+      - id: "mmlby_required_docs"
+        type: "documents_present"
+        documents: ["aadhaar", "domicile_certificate", "income_certificate", "bank_passbook"]
+        clause_ref: "SCH_MAJHI_LADKI_BAHIN_DOCS_ALL"
+        description: "Must provide Aadhaar card, domicile certificate, income proof/ration card, and bank passbook"
+      - id: "mmlby_income_cert_validity"
+        type: "max_age_days"
+        document: "income_certificate"
+        value: 365
+        clause_ref: "SCH_MAJHI_LADKI_BAHIN_DOCS_3"
+        description: "Income certificate must be issued within 365 days of application date"
+
+  - scheme_id: "SCH_PMAY_URBAN"
+    name: "Pradhan Mantri Awas Yojana - Urban"
+    rules:
+      - id: "pmay_ews_income_limit"
+        type: "numeric_max"
+        field: "annual_income"
+        value: 300000
+        clause_ref: "SCH_PMAY_URBAN_ELIG_2"
+        description: "Annual family income for EWS category must not exceed ₹3,00,000"
+      - id: "pmay_age_min"
+        type: "numeric_min"
+        field: "age"
+        value: 21
+        clause_ref: "SCH_PMAY_URBAN_ELIG_AGE"
+        description: "Applicant head of household must be at least 21 years old"
+      - id: "pmay_required_docs"
+        type: "documents_present"
+        documents: ["income_certificate", "aadhaar", "domicile_certificate", "land_ownership_proof", "no_pucca_house_affidavit"]
+        clause_ref: "SCH_PMAY_URBAN_DOCS_ALL"
+        description: "Must provide income certificate, aadhaar of family, domicile proof, land document, and affidavit"
+
+  - scheme_id: "SCH_NMMS"
+    name: "National Means-cum-Merit Scholarship Scheme"
+    rules:
+      - id: "nmms_income_limit"
+        type: "numeric_max"
+        field: "annual_income"
+        value: 350000
+        clause_ref: "SCH_NMMS_ELIG_3"
+        description: "Parental annual income from all sources must not exceed ₹3,50,000"
+      - id: "nmms_age_range"
+        type: "numeric_range"
+        field: "age"
+        min: 12
+        max: 18
+        clause_ref: "SCH_NMMS_ELIG_AGE"
+        description: "Student age must be between 12 and 18 years"
+      - id: "nmms_required_docs"
+        type: "documents_present"
+        documents: ["marksheet", "income_certificate", "aadhaar", "bank_passbook"]
+        clause_ref: "SCH_NMMS_DOCS_ALL"
+        description: "Must provide class 7 marksheet, income certificate, aadhaar and bank details"
+
+  - scheme_id: "SCH_PM_KISAN"
+    name: "PM Kisan Samman Nidhi"
+    rules:
+      - id: "pmkisan_required_docs"
+        type: "documents_present"
+        documents: ["land_record", "aadhaar", "bank_passbook"]
+        clause_ref: "SCH_PM_KISAN_DOCS_ALL"
+        description: "Must provide land ownership document (7/12 / Khatauni), Aadhaar, and bank account details"
+      - id: "pmkisan_age_min"
+        type: "numeric_min"
+        field: "age"
+        value: 18
+        clause_ref: "SCH_PM_KISAN_ELIG_AGE"
+        description: "Applicant landholder must be at least 18 years old"
+
+  - scheme_id: "SCH_KANYA_SUMANGALA"
+    name: "Mukhyamantri Kanya Sumangala Yojana"
+    rules:
+      - id: "mksy_income_limit"
+        type: "numeric_max"
+        field: "annual_income"
+        value: 300000
+        clause_ref: "SCH_KANYA_SUMANGALA_ELIG_2"
+        description: "Family annual income from all sources must not exceed ₹3,00,000"
+      - id: "mksy_state_req"
+        type: "state_in"
+        field: "state"
+        allowed: ["Uttar Pradesh", "UP"]
+        clause_ref: "SCH_KANYA_SUMANGALA_ELIG_1"
+        description: "Girl child and parents must be permanent residents of Uttar Pradesh"
+      - id: "mksy_required_docs"
+        type: "documents_present"
+        documents: ["birth_certificate", "domicile_certificate", "income_certificate", "aadhaar", "bank_passbook"]
+        clause_ref: "SCH_KANYA_SUMANGALA_DOCS_ALL"
+        description: "Must provide birth certificate, domicile certificate, income certificate, aadhaar, and bank passbook"
+
+  - scheme_id: "SCH_POST_MATRIC_OBC"
+    name: "Post Matric Scholarship for OBC Students"
+    rules:
+      - id: "obc_income_limit"
+        type: "numeric_max"
+        field: "annual_income"
+        value: 150000
+        clause_ref: "SCH_POST_MATRIC_OBC_ELIG_2"
+        description: "Annual family income must not exceed ₹1,50,000 for full scholarship"
+      - id: "obc_category_req"
+        type: "category_in"
+        field: "category"
+        allowed: ["OBC", "VJNT", "SBC"]
+        clause_ref: "SCH_POST_MATRIC_OBC_ELIG_1"
+        description: "Applicant must belong to OBC category of Maharashtra State"
+      - id: "obc_state_req"
+        type: "state_in"
+        field: "state"
+        allowed: ["Maharashtra", "MH"]
+        clause_ref: "SCH_POST_MATRIC_OBC_ELIG_1"
+        description: "Applicant must be a permanent resident of Maharashtra"
+      - id: "obc_required_docs"
+        type: "documents_present"
+        documents: ["income_certificate", "caste_certificate", "non_creamy_layer", "domicile_certificate", "marksheet", "aadhaar"]
+        clause_ref: "SCH_POST_MATRIC_OBC_DOCS_ALL"
+        description: "Must submit income certificate, caste certificate, non-creamy layer, domicile, marksheet and aadhaar"
+      - id: "obc_income_cert_validity"
+        type: "max_age_days"
+        document: "income_certificate"
+        value: 365
+        clause_ref: "SCH_POST_MATRIC_OBC_DOCS_1"
+        description: "Income certificate must be issued within 365 days of application"
+
+  - scheme_id: "SCH_PM_SVANIDHI"
+    name: "PM Street Vendor's AtmaNirbhar Nidhi"
+    rules:
+      - id: "svanidhi_age_min"
+        type: "numeric_min"
+        field: "age"
+        value: 18
+        clause_ref: "SCH_PM_SVANIDHI_ELIG_4"
+        description: "Applicant must be at least 18 years old"
+      - id: "svanidhi_required_docs"
+        type: "documents_present"
+        documents: ["vending_certificate", "aadhaar", "bank_passbook"]
+        clause_ref: "SCH_PM_SVANIDHI_DOCS_ALL"
+        description: "Must provide Certificate of Vending / LoR, Aadhaar card and bank account details"

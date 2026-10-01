@@ -1,0 +1,1352 @@
+[
+  {
+    "id": "CASE_0001",
+    "data": {
+      "text": "अर्ज नाकारला: income certificate जोडलेले नाही.",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0002",
+    "data": {
+      "text": "जिल्हा अधिकाऱ्यांकडून अर्ज अमान्य.",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0003",
+    "data": {
+      "text": "Application under review by competent authority.",
+      "scheme": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0004",
+    "data": {
+      "text": "संस्थान स्तर पर सत्यापन लंबित।",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0005",
+    "data": {
+      "text": "आवश्यक दस्तावेज जमा नहीं किए गए हैं।",
+      "scheme": "Pradhan Mantri Awas Yojana - Urban",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0006",
+    "data": {
+      "text": "आयु सीमा मानदंड पूरा नहीं हुआ। आवेदक की आयु 75 वर्ष है।",
+      "scheme": "Ayushman Bharat PM Jan Arogya Yojana",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 75
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0007",
+    "data": {
+      "text": "बँक IFSC किंवा खाते क्रमांक चुकीचा भरला आहे.",
+      "scheme": "Mukhyamantri Kanya Sumangala Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "incomplete_or_incorrect_form"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0008",
+    "data": {
+      "text": "वय मर्यादेचे उल्लंघन.",
+      "scheme": "Ayushman Bharat PM Jan Arogya Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 75
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0009",
+    "data": {
+      "text": "आवेदक Maharashtra का स्थायी निवासी नहीं है।",
+      "scheme": "PM Kisan Samman Nidhi",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_category_or_residence"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0010",
+    "data": {
+      "text": "अधिवास प्रमाणपत्र अपूर्ण.",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_category_or_residence"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0011",
+    "data": {
+      "text": "Submitted through wrong application portal channel.",
+      "scheme": "PM Street Vendor's AtmaNirbhar Nidhi",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "deadline_or_process_error"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0012",
+    "data": {
+      "text": "आवेदन पत्र अपूर्ण है। अनिवार्य विवरण खाली छोड़े गए।",
+      "scheme": "Mukhyamantri Kanya Sumangala Yojana",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "incomplete_or_incorrect_form"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0013",
+    "data": {
+      "text": "एकाच आधार क्रमांकावर दुप्पट (Duplicate) अर्ज आढळला.",
+      "scheme": "Pradhan Mantri Awas Yojana - Urban",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "duplicate_application"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0014",
+    "data": {
+      "text": "टिप्पणी: कागदपत्रे अपूर्ण / पडताळणी प्रलंबित.",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0015",
+    "data": {
+      "text": "वय मर्यादा निकष पूर्ण होत नाही. अर्जदाराचे वय 14 वर्षे आहे.",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 14
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0016",
+    "data": {
+      "text": "आवश्यक कागदपत्रे अपूर्ण आहेत. दाखला अपलोड केला नाही.",
+      "scheme": "Pradhan Mantri Awas Yojana - Urban",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0017",
+    "data": {
+      "text": "अपूर्ण अर्ज. अनिवार्य रकाने रिकामे सोडले आहेत.",
+      "scheme": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "incomplete_or_incorrect_form"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0018",
+    "data": {
+      "text": "आधार कार्ड और आय प्रमाण पत्र में नाम का मिलान नहीं हुआ।",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "document_mismatch"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0019",
+    "data": {
+      "text": "अपूर्ण अर्ज. अनिवार्य रकाने रिकामे सोडले आहेत.",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "incomplete_or_incorrect_form"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0020",
+    "data": {
+      "text": "Applicant age does not fall within prescribed scheme range.",
+      "scheme": "Post Matric Scholarship for OBC Students",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 75
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0021",
+    "data": {
+      "text": "वय मर्यादा निकष पूर्ण होत नाही. अर्जदाराचे वय 75 वर्षे आहे.",
+      "scheme": "Mukhyamantri Majhi Ladki Bahin Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 75
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0022",
+    "data": {
+      "text": "कागदपत्रांमधील जन्मतारखेत तफावत आढळली.",
+      "scheme": "Mukhyamantri Majhi Ladki Bahin Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "document_mismatch"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0023",
+    "data": {
+      "text": "एक ही आवेदक द्वारा अनेक आवेदन जमा किए गए।",
+      "scheme": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "duplicate_application"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0024",
+    "data": {
+      "text": "आयु सीमा मानदंड पूरा नहीं हुआ। आवेदक की आयु 14 वर्ष है।",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 14
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0025",
+    "data": {
+      "text": "एक ही आवेदक द्वारा अनेक आवेदन जमा किए गए।",
+      "scheme": "Mukhyamantri Kanya Sumangala Yojana",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "duplicate_application"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0026",
+    "data": {
+      "text": "उत्पन्न मर्यादा निकष पूर्ण होत नाही.",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "mr",
+      "applicant_income": 600000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_income"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0027",
+    "data": {
+      "text": "वय मर्यादेचे उल्लंघन.",
+      "scheme": "Post Matric Scholarship for OBC Students",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 14
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0028",
+    "data": {
+      "text": "Date of birth discrepancy across submitted documents.",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "document_mismatch"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0029",
+    "data": {
+      "text": "Applicant age does not fall within prescribed scheme range.",
+      "scheme": "PM Vishwakarma Scheme",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 45
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0030",
+    "data": {
+      "text": "Eligibility criteria not satisfied. Income above ceiling.",
+      "scheme": "Ayushman Bharat PM Jan Arogya Yojana",
+      "language": "en",
+      "applicant_income": 320000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_income"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0031",
+    "data": {
+      "text": "माहितीची विसंगती आढळली.",
+      "scheme": "Mukhyamantri Kanya Sumangala Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "document_mismatch"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0032",
+    "data": {
+      "text": "Pending physical verification at institute level.",
+      "scheme": "PM Street Vendor's AtmaNirbhar Nidhi",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0033",
+    "data": {
+      "text": "Document validity expired. Please submit fresh current financial year certificate.",
+      "scheme": "Mukhyamantri Kanya Sumangala Yojana",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "expired_or_invalid_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0034",
+    "data": {
+      "text": "अर्ज नाकारला: caste certificate जोडलेले नाही.",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0035",
+    "data": {
+      "text": "Pending physical verification at institute level.",
+      "scheme": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0036",
+    "data": {
+      "text": "आधार कार्ड आणि उत्पन्नाचा दाखला यांमधील नावात फरक आहे.",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "document_mismatch"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0037",
+    "data": {
+      "text": "Document incomplete. Required certificates absent.",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0038",
+    "data": {
+      "text": "समान आधार संख्या के तहत दोहरा आवेदन पाया गया।",
+      "scheme": "PM Street Vendor's AtmaNirbhar Nidhi",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "duplicate_application"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0039",
+    "data": {
+      "text": "Income proof not valid. Certificate expired beyond 1 year validity.",
+      "scheme": "PM Street Vendor's AtmaNirbhar Nidhi",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "expired_or_invalid_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0040",
+    "data": {
+      "text": "अस्वीकृत: आवेदक निर्धारित आयु सीमा में नहीं आता।",
+      "scheme": "PM Kisan Samman Nidhi",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 14
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_age"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0041",
+    "data": {
+      "text": "अर्ज नाकारला: income certificate जोडलेले नाही.",
+      "scheme": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0042",
+    "data": {
+      "text": "कागदपत्राची वैधता संपली आहे.",
+      "scheme": "Ayushman Bharat PM Jan Arogya Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "expired_or_invalid_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0043",
+    "data": {
+      "text": "कागदपत्रांची पूर्तता झालेली नाही.",
+      "scheme": "Ayushman Bharat PM Jan Arogya Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "missing_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0044",
+    "data": {
+      "text": "एकापेक्षा जास्त अर्ज दाखल केले आहेत.",
+      "scheme": "PM Street Vendor's AtmaNirbhar Nidhi",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "duplicate_application"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0045",
+    "data": {
+      "text": "संस्थेकडून पडताळणी बाकी.",
+      "scheme": "Mukhyamantri Majhi Ladki Bahin Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "verification_pending_or_unspecified"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0046",
+    "data": {
+      "text": "उत्पन्न प्रमाणपत्र मुदतबाह्य. नवीन आर्थिक वर्षाचा दाखला सादर करा.",
+      "scheme": "Mukhyamantri Majhi Ladki Bahin Yojana",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "expired_or_invalid_document"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0047",
+    "data": {
+      "text": "गलत चैनल के माध्यम से आवेदन प्रेषित।",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "hi",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "deadline_or_process_error"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0048",
+    "data": {
+      "text": "अपूर्ण अर्ज. अनिवार्य रकाने रिकामे सोडले आहेत.",
+      "scheme": "PM Vishwakarma Scheme",
+      "language": "mr",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "incomplete_or_incorrect_form"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0049",
+    "data": {
+      "text": "Incomplete form. Mandatory fields left blank.",
+      "scheme": "Post Matric Scholarship for SC Students",
+      "language": "en",
+      "applicant_income": 180000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "incomplete_or_incorrect_form"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CASE_0050",
+    "data": {
+      "text": "आवेदक की आय ₹600,000 योजना मानदंड से अधिक पाई गई।",
+      "scheme": "National Means-cum-Merit Scholarship Scheme",
+      "language": "hi",
+      "applicant_income": 600000,
+      "applicant_age": 22
+    },
+    "predictions": [
+      {
+        "model_version": "baseline_rule_v1",
+        "result": [
+          {
+            "from_name": "failure_category",
+            "to_name": "text",
+            "type": "choices",
+            "value": {
+              "choices": [
+                "eligibility_income"
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

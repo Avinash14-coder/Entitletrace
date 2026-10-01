@@ -1,0 +1,10 @@
+node_modules/
+.next/
+__pycache__/
+.venv/
+.env
+models/
+data/raw/
+data/index/
+*.parquet
+.DS_Store

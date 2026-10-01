@@ -1,0 +1,39 @@
+# Named Entity Recognition (NER) Label Schema for EntitleTrace
+
+ner_labels:
+  - SCHEME
+  - DOCUMENT_TYPE
+  - DOC_ISSUE_DATE
+  - DOC_VALID_TILL
+  - AMOUNT_INCOME
+  - AGE
+  - CATEGORY
+  - STATE
+  - NAME
+  - DEADLINE
+  - FIELD_NAME
+
+bio_tags:
+  - O
+  - B-SCHEME
+  - I-SCHEME
+  - B-DOCUMENT_TYPE
+  - I-DOCUMENT_TYPE
+  - B-DOC_ISSUE_DATE
+  - I-DOC_ISSUE_DATE
+  - B-DOC_VALID_TILL
+  - I-DOC_VALID_TILL
+  - B-AMOUNT_INCOME
+  - I-AMOUNT_INCOME
+  - B-AGE
+  - I-AGE
+  - B-CATEGORY
+  - I-CATEGORY
+  - B-STATE
+  - I-STATE
+  - B-NAME
+  - I-NAME
+  - B-DEADLINE
+  - I-DEADLINE
+  - B-FIELD_NAME
+  - I-FIELD_NAME

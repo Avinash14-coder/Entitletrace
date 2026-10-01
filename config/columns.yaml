@@ -1,0 +1,34 @@
+# Canonical column mapping for myScheme dataset
+# Map canonical application fields to raw CSV headers
+
+canonical_to_csv:
+  scheme_id: "scheme_id"
+  name: "scheme_name"
+  level: "level"
+  state: "state"
+  categories: "categories"
+  target_group: "target_group"
+  benefit_type: "benefit_type"
+  details: "details"
+  benefits: "benefits"
+  eligibility: "eligibility"
+  application_process: "application_process"
+  documents_required: "documents_required"
+  faqs: "faqs"
+  source_url: "source_url"
+
+csv_to_canonical:
+  "scheme_id": "scheme_id"
+  "scheme_name": "name"
+  "level": "level"
+  "state": "state"
+  "categories": "categories"
+  "target_group": "target_group"
+  "benefit_type": "benefit_type"
+  "details": "details"
+  "benefits": "benefits"
+  "eligibility": "eligibility"
+  "application_process": "application_process"
+  "documents_required": "documents_required"
+  "faqs": "faqs"
+  "source_url": "source_url"

@@ -1,0 +1,40 @@
+{
+  "nav": {
+    "title": "EntitleTrace",
+    "tagline": "Welfare Rejection Diagnostic",
+    "home": "Home",
+    "analyze": "Analyze Case",
+    "schemes": "Scheme Explorer",
+    "insights": "Analytics & Insights",
+    "about": "About Project"
+  },
+  "home": {
+    "hero_title": "Understand Why Welfare Applications Fail & How to Fix Them",
+    "hero_subtitle": "EntitleTrace links vague government rejection remarks directly to official scheme clauses and required documents with deterministic evidence.",
+    "try_sample": "Try Acceptance Demo Case",
+    "analyze_now": "Analyze Your Application",
+    "features": {
+      "f1_title": "Pinpoint Failure Reasons",
+      "f1_desc": "Categorizes vague remarks into a standard 10-category taxonomy.",
+      "f2_title": "Deterministic Rule Checks",
+      "f2_desc": "Calculates income limits, age eligibility, and certificate issue validity.",
+      "f3_title": "Evidence-Linked Clauses",
+      "f3_desc": "Displays exact clause text with direct source links to official scheme portals."
+    },
+    "stepper": {
+      "title": "How EntitleTrace Explains Rejections",
+      "s1": "Select Scheme & Case Details",
+      "s2": "Input Rejection Remark / Upload Document",
+      "s3": "View Evidence-Backed Diagnosis & Fix"
+    }
+  },
+  "analyze": {
+    "title": "Application Rejection Analyzer",
+    "step1": "1. Select Scheme",
+    "step2": "2. Provide Case Details",
+    "step3": "3. Rejection Diagnosis & Evidence",
+    "prefill_worked_demo": "Load Worked Demo Case (Income & Expired Cert)",
+    "prefill_missing_doc": "Load Sample: Missing Caste Certificate",
+    "prefill_ladki_bahin": "Load Sample: Majhi Ladki Bahin (Out of State)"
+  }
+}
