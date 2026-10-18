@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { fetchSchemes, Scheme } from '@/lib/api';
-import { Search, Filter, BookOpen, ExternalLink, ArrowRight } from 'lucide-react';
+import { Search, Filter, BookOpen, ExternalLink, ArrowRight, RefreshCw } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function SchemesPage() {
+  const { t } = useLanguage();
   const [schemes, setSchemes] = useState<Scheme[]>([]);
   const [total, setTotal] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,7 +31,7 @@ export default function SchemesPage() {
       setSchemes(res.schemes);
       setTotal(res.total);
     } catch (err) {
-      console.error(err);
+      console.error("Failed to load schemes:", err);
     } finally {
       setLoading(false);
     }
@@ -42,10 +44,10 @@ export default function SchemesPage() {
       <div>
         <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
           <BookOpen className="w-7 h-7 text-emerald-500" />
-          <span>Government Welfare Scheme Explorer</span>
+          <span>{t('schemes.title', 'Government Welfare Scheme Explorer')}</span>
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Browse central and state welfare scheme rules, eligibility guidelines, and document requirements.
+          {t('schemes.subtitle', 'Browse central and state welfare scheme rules, eligibility guidelines, and document requirements.')}
         </p>
       </div>
 
@@ -57,7 +59,7 @@ export default function SchemesPage() {
           <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-3" />
           <input
             type="text"
-            placeholder="Search scheme name, education, farmer, housing..."
+            placeholder={t('schemes.search_placeholder', 'Search scheme name, education, farmer, housing...')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-emerald-500"
@@ -70,9 +72,9 @@ export default function SchemesPage() {
           onChange={(e) => setSelectedLevel(e.target.value)}
           className="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-medium"
         >
-          <option value="">All Levels (Central & State)</option>
-          <option value="Central">Central Govt Schemes</option>
-          <option value="State">State Govt Schemes</option>
+          <option value="">{t('schemes.filter_all_levels', 'All Levels (Central & State)')}</option>
+          <option value="Central">{t('schemes.filter_central', 'Central Govt Schemes')}</option>
+          <option value="State">{t('schemes.filter_state', 'State Govt Schemes')}</option>
         </select>
 
         {/* Category Filter */}
@@ -81,22 +83,33 @@ export default function SchemesPage() {
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-medium"
         >
-          <option value="">All Categories</option>
-          <option value="Education">Education & Scholarships</option>
-          <option value="Agriculture">Agriculture & Farming</option>
-          <option value="Housing">Housing</option>
-          <option value="Women Welfare">Women Welfare</option>
-          <option value="Health">Health Insurance</option>
-          <option value="Financial Services">Financial & Micro Credit</option>
+          <option value="">{t('schemes.filter_all_categories', 'All Categories')}</option>
+          <option value="Education">{t('schemes.filter_education', 'Education & Scholarships')}</option>
+          <option value="Agriculture">{t('schemes.filter_agriculture', 'Agriculture & Farming')}</option>
+          <option value="Housing">{t('schemes.filter_housing', 'Housing')}</option>
+          <option value="Women Welfare">{t('schemes.filter_women', 'Women Welfare')}</option>
+          <option value="Health">{t('schemes.filter_health', 'Health Insurance')}</option>
+          <option value="Financial Services">{t('schemes.filter_finance', 'Financial & Micro Credit')}</option>
         </select>
 
       </div>
 
       {/* Scheme Cards List */}
       {loading ? (
-        <div className="py-12 text-center text-sm text-slate-500">Loading scheme catalog...</div>
+        <div className="py-12 text-center text-sm text-slate-500 flex items-center justify-center gap-2">
+          <RefreshCw className="w-4 h-4 animate-spin text-emerald-500" />
+          <span>{t('schemes.loading', 'Loading scheme catalog...')}</span>
+        </div>
       ) : schemes.length === 0 ? (
-        <div className="py-12 text-center text-sm text-slate-500">No matching schemes found for your query.</div>
+        <div className="py-12 text-center text-sm text-slate-500 space-y-3">
+          <p>{t('schemes.no_schemes', 'No matching schemes found for your query.')}</p>
+          <button
+            onClick={loadSchemes}
+            className="px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white hover:bg-emerald-500 transition-colors"
+          >
+            {t('schemes.retry', 'Retry')}
+          </button>
+        </div>
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {schemes.map((scheme) => (
@@ -111,7 +124,7 @@ export default function SchemesPage() {
                       ? 'bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300'
                       : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
                   }`}>
-                    {scheme.level} ({scheme.state})
+                    {scheme.level === 'Central' ? t('schemes.filter_central', 'Central') : t('schemes.filter_state', 'State')} ({scheme.state})
                   </span>
 
                   <span className="text-[11px] font-mono text-slate-400">{scheme.scheme_id}</span>
@@ -127,13 +140,13 @@ export default function SchemesPage() {
               </div>
 
               <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
-                <span className="text-slate-400 font-medium">{scheme.target_group || 'All Citizens'}</span>
+                <span className="text-slate-400 font-medium">{scheme.target_group || t('schemes.all_citizens', 'All Citizens')}</span>
                 
                 <Link
                   href={`/schemes/${scheme.scheme_id}`}
                   className="text-emerald-600 dark:text-emerald-400 hover:underline font-bold flex items-center gap-1"
                 >
-                  <span>View Rules & Clauses</span>
+                  <span>{t('schemes.view_rules', 'View Rules & Clauses')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>

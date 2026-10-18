@@ -33,6 +33,7 @@ import {
   Info,
   RotateCcw
 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Required documents mapping per scheme
 const SCHEME_DOCUMENTS_MAP: Record<string, { name: string; docs: { type: string; label: string; issueDateRequired?: boolean }[] }> = {
@@ -133,17 +134,29 @@ interface ManagedDocItem {
   submitted: boolean;
   issue_date: string;
   isSchemeRequired: boolean;
+  issueDateRequired?: boolean;
   text?: string;
 }
+
+const DEFAULT_SCHEMES: Scheme[] = [
+  { scheme_id: 'SCH_POST_MATRIC_OBC', name: 'Post Matric Scholarship for OBC Students', level: 'State', state: 'Maharashtra' },
+  { scheme_id: 'SCH_POST_MATRIC_SC', name: 'Post Matric Scholarship for SC Students', level: 'State', state: 'Maharashtra' },
+  { scheme_id: 'SCH_MAJHI_LADKI_BAHIN', name: 'Mukhyamantri Majhi Ladki Bahin Yojana', level: 'State', state: 'Maharashtra' },
+  { scheme_id: 'SCH_PMAY_URBAN', name: 'Pradhan Mantri Awas Yojana - Urban', level: 'Central', state: 'All India' },
+  { scheme_id: 'SCH_NMMS', name: 'National Means-cum-Merit Scholarship Scheme', level: 'Central', state: 'All India' },
+  { scheme_id: 'SCH_PM_KISAN', name: 'PM Kisan Samman Nidhi', level: 'Central', state: 'All India' },
+  { scheme_id: 'SCH_KANYA_SUMANGALA', name: 'Mukhyamantri Kanya Sumangala Yojana', level: 'State', state: 'Uttar Pradesh' },
+  { scheme_id: 'SCH_PM_SVANIDHI', name: "PM Street Vendor's AtmaNirbhar Nidhi", level: 'Central', state: 'All India' },
+];
 
 export default function AnalyzePage() {
   const searchParams = useSearchParams();
   const demoParam = searchParams.get('demo');
   const modeParam = searchParams.get('mode');
 
-  const [schemes, setSchemes] = useState<Scheme[]>([]);
+  const [schemes, setSchemes] = useState<Scheme[]>(DEFAULT_SCHEMES);
   const [selectedSchemeId, setSelectedSchemeId] = useState<string>('SCH_POST_MATRIC_OBC');
-  const [lang, setLang] = useState<string>('en');
+  const { lang, t } = useLanguage();
 
   // Case Input Form State
   const [applicantName, setApplicantName] = useState('');
@@ -156,9 +169,9 @@ export default function AnalyzePage() {
   // Managed Document List State
   const [managedDocs, setManagedDocs] = useState<ManagedDocItem[]>([]);
   
-  // Add Extra Document state
+  // Add Extra Document state - blank issue date so user enters real date
   const [newDocType, setNewDocType] = useState('birth_certificate');
-  const [newDocIssueDate, setNewDocIssueDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [newDocIssueDate, setNewDocIssueDate] = useState('');
   const [duplicateWarning, setDuplicateWarning] = useState<string | null>(null);
 
   // Loading & Result States
@@ -188,39 +201,40 @@ export default function AnalyzePage() {
   // When selected scheme changes, update document requirements list
   const handleSchemeChange = (schemeId: string) => {
     setSelectedSchemeId(schemeId);
-    syncDocsForScheme(schemeId);
+    syncDocsForScheme(schemeId, undefined, false);
   };
 
-  const syncDocsForScheme = (schemeId: string, customDates?: Record<string, string>) => {
-    const todayStr = new Date().toISOString().split('T')[0];
+  const syncDocsForScheme = (schemeId: string, customDates?: Record<string, string>, defaultSubmitted = false) => {
     const mapInfo = SCHEME_DOCUMENTS_MAP[schemeId];
     
-    let requiredDocs: { type: string; label: string }[] = [];
+    let requiredDocs: { type: string; label: string; issueDateRequired?: boolean }[] = [];
     if (mapInfo) {
       requiredDocs = mapInfo.docs;
     } else {
       // Default fallback if scheme is auto-detect or unknown
       requiredDocs = [
-        { type: 'income_certificate', label: 'Income Certificate' },
+        { type: 'income_certificate', label: 'Income Certificate', issueDateRequired: true },
         { type: 'caste_certificate', label: 'Caste Certificate' },
         { type: 'domicile_certificate', label: 'Domicile Certificate' },
         { type: 'aadhaar', label: 'Aadhaar Card' }
       ];
     }
 
+    // In custom mode, documents start unsubmitted and with empty date, asking the user
     const initialDocs: ManagedDocItem[] = requiredDocs.map((d) => ({
       type: d.type,
       label: d.label,
-      submitted: true,
-      issue_date: customDates?.[d.type] || todayStr,
-      isSchemeRequired: true
+      submitted: defaultSubmitted,
+      issue_date: customDates?.[d.type] || '',
+      isSchemeRequired: true,
+      issueDateRequired: d.issueDateRequired || false
     }));
 
     setManagedDocs(initialDocs);
     setDuplicateWarning(null);
   };
 
-  // Clean Custom Form Loader
+  // Clean Custom Form Loader - leaves documents unsubmitted and dates empty for user to provide
   const loadFreshCustomForm = () => {
     setSelectedSchemeId('SCH_POST_MATRIC_OBC');
     setApplicantName('');
@@ -231,7 +245,7 @@ export default function AnalyzePage() {
     setRemark('');
     setResult(null);
     setErrorMsg(null);
-    syncDocsForScheme('SCH_POST_MATRIC_OBC');
+    syncDocsForScheme('SCH_POST_MATRIC_OBC', undefined, false);
   };
 
   // Demo Loaders
@@ -307,20 +321,33 @@ export default function AnalyzePage() {
     setManagedDocs(updated);
   };
 
+  const markAllDocsSubmitted = () => {
+    setManagedDocs(managedDocs.map((d) => ({ ...d, submitted: true })));
+  };
+
+  const clearAllDocsSubmitted = () => {
+    setManagedDocs(managedDocs.map((d) => ({ ...d, submitted: false })));
+  };
+
   const handleAddExtraDocument = () => {
     setDuplicateWarning(null);
 
-    // Check if docType already exists in managedDocs list
-    const exists = managedDocs.some((d) => d.type === newDocType);
-    if (exists) {
-      const docObj = ALL_DOC_OPTIONS.find((opt) => opt.type === newDocType);
-      const name = docObj ? docObj.label : newDocType.replace(/_/g, ' ');
-      setDuplicateWarning(`"${name}" is already in your document checklist below! You can toggle its status or update its date directly.`);
-      return;
-    }
-
     const docObj = ALL_DOC_OPTIONS.find((opt) => opt.type === newDocType);
     const label = docObj ? docObj.label : newDocType.replace(/_/g, ' ');
+
+    // Check if docType already exists in managedDocs checklist
+    const existingIdx = managedDocs.findIndex((d) => d.type === newDocType);
+    if (existingIdx >= 0) {
+      const updated = [...managedDocs];
+      updated[existingIdx].submitted = true;
+      if (newDocIssueDate) {
+        updated[existingIdx].issue_date = newDocIssueDate;
+      }
+      setManagedDocs(updated);
+      setDuplicateWarning(`✓ "${label}" marked as submitted${newDocIssueDate ? ` with issue date ${newDocIssueDate}` : ''}!`);
+      setNewDocIssueDate('');
+      return;
+    }
 
     setManagedDocs([
       ...managedDocs,
@@ -328,10 +355,13 @@ export default function AnalyzePage() {
         type: newDocType,
         label: label,
         submitted: true,
-        issue_date: newDocIssueDate || new Date().toISOString().split('T')[0],
-        isSchemeRequired: false
+        issue_date: newDocIssueDate || '',
+        isSchemeRequired: false,
+        issueDateRequired: newDocType === 'income_certificate' || newDocType === 'non_creamy_layer'
       }
     ]);
+    setDuplicateWarning(`✓ "${label}" added to your documents checklist!`);
+    setNewDocIssueDate('');
   };
 
   const handleRemoveDoc = (index: number) => {
@@ -441,10 +471,10 @@ export default function AnalyzePage() {
         <div>
           <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
             <Sparkles className="w-7 h-7 text-emerald-500" />
-            <span>Application Rejection Analyzer</span>
+            <span>{t('analyze.title', 'Application Rejection Analyzer')}</span>
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Input scheme details, applicant information, and rejection remark to generate evidence-backed diagnosis.
+            {t('analyze.subtitle', 'Input scheme details, applicant information, and rejection remark to generate evidence-backed diagnosis.')}
           </p>
         </div>
 
@@ -455,7 +485,7 @@ export default function AnalyzePage() {
             className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 transition-colors flex items-center gap-1.5"
           >
             <RotateCcw className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Clear / Custom Form</span>
+            <span>{t('analyze.clear_btn', 'Clear / Custom Form')}</span>
           </button>
 
           <button
@@ -463,21 +493,21 @@ export default function AnalyzePage() {
             className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 hover:bg-emerald-200 transition-colors flex items-center gap-1.5"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Demo Case (Income & Expired)</span>
+            <span>{t('analyze.demo_income', 'Demo Case (Income & Expired)')}</span>
           </button>
 
           <button
             onClick={loadMissingDocDemo}
             className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors"
           >
-            Missing Doc Case
+            {t('analyze.demo_missing', 'Missing Doc Case')}
           </button>
 
           <button
             onClick={loadLadkiBahinDemo}
             className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition-colors"
           >
-            Domicile Case
+            {t('analyze.demo_domicile', 'Domicile Case')}
           </button>
         </div>
       </div>
@@ -491,14 +521,14 @@ export default function AnalyzePage() {
           {/* Step 1: Scheme Selection */}
           <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Step 1. Target Scheme
+              {t('analyze.step1_title', 'Step 1. Target Scheme')}
             </label>
             <select
               value={selectedSchemeId}
               onChange={(e) => handleSchemeChange(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-semibold text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
-              <option value="DETECT_AUTO">🔍 Auto-Detect Scheme from Remark</option>
+              <option value="DETECT_AUTO">{t('analyze.step1_auto', '🔍 Auto-Detect Scheme from Remark')}</option>
               {schemes.map((s) => (
                 <option key={s.scheme_id} value={s.scheme_id}>
                   {s.name} ({s.level} - {s.state})
@@ -507,7 +537,7 @@ export default function AnalyzePage() {
             </select>
             {selectedSchemeObj && (
               <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
-                ✓ Dynamic document checklist loaded for {selectedSchemeObj.name}
+                {t('analyze.step1_loaded', '✓ Dynamic document checklist loaded for')} {selectedSchemeObj.name}
               </p>
             )}
           </div>
@@ -515,15 +545,17 @@ export default function AnalyzePage() {
           {/* Step 2: Applicant Case Details */}
           <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Step 2. Applicant Profile & Remark
+              {t('analyze.step2_title', 'Step 2. Applicant Profile & Remark')}
             </label>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Applicant Name</label>
+                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  {t('analyze.name_label', 'Applicant Name')}
+                </label>
                 <input
                   type="text"
-                  placeholder="e.g. Avinash Pawar"
+                  placeholder={t('analyze.name_placeholder', 'e.g. Avinash Pawar')}
                   value={applicantName}
                   onChange={(e) => setApplicantName(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
@@ -531,47 +563,55 @@ export default function AnalyzePage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Age (Years)</label>
+                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  {t('analyze.age_label', 'Age (Years)')}
+                </label>
                 <input
                   type="number"
                   value={age || ''}
                   onChange={(e) => setAge(Number(e.target.value))}
-                  placeholder="e.g. 21"
+                  placeholder={t('analyze.age_placeholder', 'e.g. 21')}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Annual Income (₹)</label>
+                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  {t('analyze.income_label', 'Annual Income (₹)')}
+                </label>
                 <input
                   type="number"
                   value={annualIncome || ''}
                   onChange={(e) => setAnnualIncome(Number(e.target.value))}
-                  placeholder="e.g. 180000"
+                  placeholder={t('analyze.income_placeholder', 'e.g. 180000')}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm font-semibold text-emerald-600 dark:text-emerald-400"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Category</label>
+                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  {t('analyze.category_label', 'Category')}
+                </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
                 >
-                  <option value="SC">SC</option>
-                  <option value="ST">ST</option>
-                  <option value="OBC">OBC</option>
-                  <option value="General">General</option>
-                  <option value="EWS">EWS</option>
+                  <option value="SC">{t('analyze.category_sc', 'SC (Scheduled Caste)')}</option>
+                  <option value="ST">{t('analyze.category_st', 'ST (Scheduled Tribe)')}</option>
+                  <option value="OBC">{t('analyze.category_obc', 'OBC (Other Backward Class)')}</option>
+                  <option value="General">{t('analyze.category_general', 'General (Open)')}</option>
+                  <option value="EWS">{t('analyze.category_ews', 'EWS (Economically Weaker Section)')}</option>
                 </select>
               </div>
 
               <div className="col-span-2">
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">State of Domicile</label>
+                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  {t('analyze.state_label', 'State of Domicile')}
+                </label>
                 <input
                   type="text"
-                  placeholder="e.g. Maharashtra"
+                  placeholder={t('analyze.state_placeholder', 'e.g. Maharashtra')}
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"
@@ -582,25 +622,54 @@ export default function AnalyzePage() {
             {/* Rejection Remark Field */}
             <div>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                Official Rejection Remark / Remark Text
+                {t('analyze.remark_label', 'Official Rejection Remark / Remark Text')}
               </label>
               <textarea
                 rows={3}
                 value={remark}
                 onChange={(e) => setRemark(e.target.value)}
-                placeholder="e.g. Income proof not valid. Certificate expired."
+                placeholder={t('analyze.remark_placeholder', 'e.g. Income proof not valid. Certificate expired.')}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-emerald-500 font-mono"
               />
             </div>
 
             {/* Step 3: Scheme Documents Checklist */}
             <div className="border-t border-slate-200 dark:border-slate-800 pt-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                  Step 3. Scheme Documents Checklist
-                </label>
-                <span className="text-[11px] text-slate-400 font-medium">
-                  {managedDocs.filter(d => d.submitted).length} of {managedDocs.length} Submitted
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                    {t('analyze.step3_title', 'Step 3. Scheme Documents Checklist')}
+                  </label>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    {t('analyze.step3_subtitle', 'Specify which documents were submitted and provide their actual issue dates.')}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    type="button"
+                    onClick={markAllDocsSubmitted}
+                    className="px-2 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 rounded-md transition-colors"
+                    title="Mark all listed documents as submitted"
+                  >
+                    {t('analyze.select_all', 'Select All')}
+                  </button>
+                  <span className="text-slate-300 dark:text-slate-700">|</span>
+                  <button
+                    type="button"
+                    onClick={clearAllDocsSubmitted}
+                    className="px-2 py-1 text-[11px] font-semibold text-slate-500 hover:text-rose-500 bg-slate-100 dark:bg-slate-800 rounded-md transition-colors"
+                    title="Uncheck all listed documents"
+                  >
+                    {t('analyze.uncheck_all', 'Uncheck All')}
+                  </button>
+                </div>
+              </div>
+
+              {/* Status summary pill */}
+              <div className="flex items-center justify-between text-xs px-3 py-1.5 rounded-lg bg-slate-100/80 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400">
+                <span>{t('analyze.status_summary', 'Application Documents Status:')}</span>
+                <span className="font-semibold text-slate-800 dark:text-slate-200">
+                  {managedDocs.filter(d => d.submitted).length} of {managedDocs.length} {t('analyze.submitted_count', 'Submitted')}
                 </span>
               </div>
 
@@ -608,27 +677,27 @@ export default function AnalyzePage() {
               <div className="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 text-blue-900 dark:text-blue-200 text-xs space-y-1">
                 <div className="font-bold flex items-center gap-1.5 text-blue-800 dark:text-blue-300">
                   <Info className="w-4 h-4 text-blue-500" />
-                  <span>How to verify documents (2 flexible modes):</span>
+                  <span>{t('analyze.how_to_verify', 'How to verify documents:')}</span>
                 </div>
                 <div className="leading-relaxed text-[11px] space-y-1">
                   <p>
-                    • <strong>Option A (Fast Checklist Mode)</strong>: Check <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">[✓]</span> which documents the applicant submitted and pick their issue dates. <em>No PDF upload required!</em>
+                    • <strong>{t('analyze.opt_checklist', 'Checklist Mode: Click a document card to toggle submitted status and type the actual issue date printed on your physical or digital certificate.')}</strong>
                   </p>
                   <p>
-                    • <strong>Option B (File Extraction Mode)</strong>: Click <Upload className="inline w-3 h-3 text-blue-600 dark:text-blue-400"/> on any card to upload actual PDF/DOCX files. EntitleTrace will parse text & dates automatically!
+                    • <strong>{t('analyze.opt_upload', 'File Extraction Mode: Click upload on any card to upload actual PDF/DOCX files.')}</strong>
                   </p>
                 </div>
               </div>
 
               {/* Dynamic Document List Items */}
-              <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+              <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
                 {managedDocs.map((doc, idx) => (
                   <div
                     key={idx}
                     className={`p-3 rounded-xl border transition-all ${
                       doc.submitted
-                        ? 'bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700'
-                        : 'bg-rose-50/50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50 opacity-80'
+                        ? 'bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-300 dark:border-emerald-800/80 shadow-sm'
+                        : 'bg-white dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
@@ -636,19 +705,30 @@ export default function AnalyzePage() {
                       <button
                         type="button"
                         onClick={() => toggleDocSubmitted(idx)}
-                        className="flex items-start gap-2 text-left"
+                        className="flex items-start gap-2.5 text-left flex-1"
                       >
                         {doc.submitted ? (
                           <CheckSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
                         ) : (
-                          <Square className="w-4 h-4 text-rose-500 mt-0.5 shrink-0" />
+                          <Square className="w-4 h-4 text-slate-400 hover:text-emerald-500 mt-0.5 shrink-0 transition-colors" />
                         )}
                         <div>
-                          <div className={`text-xs font-bold ${doc.submitted ? 'text-slate-900 dark:text-white' : 'text-rose-700 dark:text-rose-300 line-through'}`}>
+                          <div className={`text-xs font-bold ${doc.submitted ? 'text-slate-900 dark:text-white' : 'text-slate-700 dark:text-slate-300'}`}>
                             {doc.label}
                           </div>
-                          <div className="text-[10px] text-slate-400 font-mono">
-                            Status: {doc.submitted ? 'Submitted' : 'Omitted / Missing'} {doc.isSchemeRequired && '• Mandatory'}
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
+                              doc.submitted
+                                ? 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                            }`}>
+                              {doc.submitted ? t('analyze.status_submitted', '✓ Submitted') : t('analyze.status_not_submitted', '○ Not Submitted')}
+                            </span>
+                            {doc.isSchemeRequired && (
+                              <span className="text-[10px] font-medium text-amber-600 dark:text-amber-400">
+                                {t('analyze.status_mandatory', '• Mandatory')}
+                              </span>
+                            )}
                           </div>
                         </div>
                       </button>
@@ -680,42 +760,73 @@ export default function AnalyzePage() {
 
                     {/* Issue Date Input (Shown if submitted) */}
                     {doc.submitted && (
-                      <div className="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between gap-2 text-xs">
-                        <span className="text-[11px] text-slate-500 font-medium flex items-center gap-1">
-                          <Calendar className="w-3 h-3 text-slate-400" />
-                          Issue Date:
-                        </span>
-                        <input
-                          type="date"
-                          value={doc.issue_date}
-                          onChange={(e) => updateDocIssueDate(idx, e.target.value)}
-                          className="px-2 py-1 rounded bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200"
-                        />
+                      <div className="mt-2.5 pt-2.5 border-t border-slate-200/80 dark:border-slate-700/80 space-y-1.5">
+                        <div className="flex items-center justify-between gap-2 text-xs">
+                          <label className="text-[11px] font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                            <span>{t('analyze.issue_date_label', 'Certificate Issue Date:')}</span>
+                            {doc.issueDateRequired && (
+                              <span className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold" title="Validity period rule applies">
+                                {t('analyze.date_required_badge', '(Required for validity)')}
+                              </span>
+                            )}
+                          </label>
+                          <input
+                            type="date"
+                            value={doc.issue_date || ''}
+                            onChange={(e) => updateDocIssueDate(idx, e.target.value)}
+                            className="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          />
+                        </div>
+                        {!doc.issue_date ? (
+                          <p className="text-[10px] text-amber-600 dark:text-amber-400 flex items-center gap-1 pl-0.5">
+                            <Info className="w-3 h-3 shrink-0" />
+                            <span>{t('analyze.date_prompt', 'Please enter the issue date printed on your certificate')}</span>
+                          </p>
+                        ) : (
+                          <p className="text-[10px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1 pl-0.5">
+                            <CheckCircle2 className="w-3 h-3 shrink-0" />
+                            <span>{t('analyze.date_recorded', 'Issue date recorded:')} {doc.issue_date}</span>
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>
                 ))}
               </div>
 
-              {/* Duplicate Warning Notification */}
+              {/* Notification / Warning Toast */}
               {duplicateWarning && (
-                <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-2">
-                  <Info className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span>{duplicateWarning}</span>
+                <div className={`p-3 rounded-xl border text-xs flex items-center justify-between gap-2 ${
+                  duplicateWarning.startsWith('✓')
+                    ? 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
+                    : 'bg-amber-50 dark:bg-amber-950/60 border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200'
+                }`}>
+                  <div className="flex items-center gap-2">
+                    <Info className="w-4 h-4 shrink-0" />
+                    <span>{duplicateWarning}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setDuplicateWarning(null)}
+                    className="text-[11px] font-bold opacity-70 hover:opacity-100"
+                  >
+                    ✕
+                  </button>
                 </div>
               )}
 
               {/* Add Extra Document Section */}
               <div className="pt-2 border-t border-slate-200 dark:border-slate-800 space-y-2">
                 <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
-                  + Add Additional Optional Document
+                  {t('analyze.add_doc_title', '+ Add Additional / Optional Document')}
                 </span>
 
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <select
                     value={newDocType}
                     onChange={(e) => setNewDocType(e.target.value)}
-                    className="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs"
+                    className="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100"
                   >
                     {ALL_DOC_OPTIONS.map((opt) => (
                       <option key={opt.type} value={opt.type}>
@@ -728,16 +839,17 @@ export default function AnalyzePage() {
                     type="date"
                     value={newDocIssueDate}
                     onChange={(e) => setNewDocIssueDate(e.target.value)}
-                    className="px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono"
+                    title="Select issue date if known"
+                    className="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-slate-100"
                   />
 
                   <button
                     type="button"
                     onClick={handleAddExtraDocument}
-                    className="px-3 py-1.5 bg-slate-800 dark:bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold rounded-lg flex items-center gap-1 shrink-0"
+                    className="px-3.5 py-1.5 bg-slate-800 dark:bg-slate-700 hover:bg-emerald-600 text-white text-xs font-bold rounded-lg flex items-center justify-center gap-1 shrink-0 transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    <span>Add</span>
+                    <span>{t('analyze.add_doc_btn', 'Add Document')}</span>
                   </button>
                 </div>
               </div>
@@ -751,7 +863,7 @@ export default function AnalyzePage() {
               className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
             >
               {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-              <span>{loading ? 'Running Rule Engine & Hybrid Retrieval...' : 'Analyze Rejection & Find Evidence'}</span>
+              <span>{loading ? t('analyze.analyzing_btn', 'Running Rule Engine & Hybrid Retrieval...') : t('analyze.analyze_btn', 'Analyze Rejection & Find Evidence')}</span>
             </button>
           </div>
         </div>
@@ -763,7 +875,7 @@ export default function AnalyzePage() {
             <div className="p-4 bg-rose-50 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 rounded-2xl text-rose-800 dark:text-rose-200 text-sm flex items-center gap-3">
               <XCircle className="w-6 h-6 text-rose-500 shrink-0" />
               <div>
-                <strong>Analysis Failed:</strong> {errorMsg}
+                <strong>{t('analyze.analysis_failed', 'Analysis Failed:')}</strong> {errorMsg}
               </div>
             </div>
           )}
@@ -773,9 +885,9 @@ export default function AnalyzePage() {
               <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 mx-auto">
                 <Sparkles className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">Ready to Analyze Application</h3>
+              <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">{t('analyze.ready_title', 'Ready to Analyze Application')}</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-                Click <strong>"Demo Case"</strong> above or fill in custom applicant details on the left to run deterministic rule analysis & clause evidence matching.
+                {t('analyze.ready_desc', 'Click "Demo Case" above or fill in custom applicant details on the left to run deterministic rule analysis & clause evidence matching.')}
               </p>
             </div>
           )}
@@ -788,7 +900,7 @@ export default function AnalyzePage() {
                 <div className="p-4 bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 rounded-xl flex items-start gap-3 text-amber-900 dark:text-amber-200 text-xs">
                   <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
                   <div>
-                    <strong>Flagged for Human Review:</strong> Confidence is below 0.65 or deterministic checks require verification by a scheme officer.
+                    {t('analyze.flagged_review', 'Flagged for Human Review: Confidence is below 0.65 or deterministic checks require verification by a scheme officer.')}
                   </div>
                 </div>
               )}
@@ -797,7 +909,7 @@ export default function AnalyzePage() {
               <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Diagnosed Primary Failure</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">{t('analyze.diagnosed_primary', 'Diagnosed Primary Failure')}</span>
                     <h2 className="text-2xl font-black text-rose-600 dark:text-rose-400 mt-1">
                       {result.primary_failure.display_name}
                     </h2>
@@ -806,7 +918,7 @@ export default function AnalyzePage() {
 
                   <div className="text-right">
                     <span className="inline-block px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-xs font-extrabold border border-emerald-300 dark:border-emerald-800">
-                      {Math.round(result.confidence * 100)}% Confidence
+                      {Math.round(result.confidence * 100)}{t('analyze.confidence_suffix', '% Confidence')}
                     </span>
                   </div>
                 </div>
@@ -815,7 +927,7 @@ export default function AnalyzePage() {
                 <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 space-y-1">
                   <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Suggested Corrective Action</span>
+                    <span>{t('analyze.suggested_action', 'Suggested Corrective Action')}</span>
                   </div>
                   <p className="text-sm font-medium text-emerald-950 dark:text-emerald-100">
                     {result.suggested_action}
@@ -828,17 +940,17 @@ export default function AnalyzePage() {
                 <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
                   <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <ShieldAlert className="w-5 h-5 text-emerald-500" />
-                    <span>Deterministic Scheme Rule Checks</span>
+                    <span>{t('analyze.deterministic_checks', 'Deterministic Scheme Rule Checks')}</span>
                   </h3>
 
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
                       <thead className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                         <tr>
-                          <th className="p-2.5 rounded-l-lg">Rule ID & Description</th>
-                          <th className="p-2.5">Status</th>
-                          <th className="p-2.5">Expected Threshold</th>
-                          <th className="p-2.5 rounded-r-lg">Actual Applicant Value</th>
+                          <th className="p-2.5 rounded-l-lg">{t('analyze.col_rule_id', 'Rule ID & Description')}</th>
+                          <th className="p-2.5">{t('analyze.col_status', 'Status')}</th>
+                          <th className="p-2.5">{t('analyze.col_expected', 'Requirement')}</th>
+                          <th className="p-2.5 rounded-r-lg">{t('analyze.col_actual', 'Actual Input')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -851,11 +963,11 @@ export default function AnalyzePage() {
                             <td className="p-2.5">
                               {rc.passed ? (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold">
-                                  <CheckCircle2 className="w-3 h-3" /> PASS
+                                  <CheckCircle2 className="w-3 h-3" /> {t('analyze.status_pass', 'PASS')}
                                 </span>
                               ) : (
                                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300 font-bold">
-                                  <XCircle className="w-3 h-3" /> FAIL
+                                  <XCircle className="w-3 h-3" /> {t('analyze.status_fail', 'FAIL')}
                                 </span>
                               )}
                             </td>
@@ -874,13 +986,13 @@ export default function AnalyzePage() {
                 <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center justify-between">
                   <span className="flex items-center gap-2">
                     <FileText className="w-5 h-5 text-blue-500" />
-                    <span>Retrieved Scheme Clause Evidence</span>
+                    <span>{t('analyze.clause_evidence', 'Official Scheme Clause Evidence')}</span>
                   </span>
-                  <span className="text-xs text-slate-400 font-normal">Ranked by BM25 + TF-IDF RRF Score</span>
+                  <span className="text-xs text-slate-400 font-normal">{t('analyze.clause_ranking', 'Ranked by BM25 + TF-IDF RRF Score')}</span>
                 </h3>
 
                 {result.linked_clauses.length === 0 ? (
-                  <p className="text-xs text-slate-500">No matching clauses retrieved for this scheme.</p>
+                  <p className="text-xs text-slate-500">{t('analyze.no_clauses', 'No matching clauses retrieved for this scheme.')}</p>
                 ) : (
                   <div className="space-y-3">
                     {result.linked_clauses.map((clause, idx) => (
@@ -896,7 +1008,7 @@ export default function AnalyzePage() {
                               rel="noreferrer"
                               className="text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 font-semibold"
                             >
-                              <span>Official Scheme Portal</span>
+                              <span>{t('analyze.portal_link', 'Official Scheme Portal')}</span>
                               <ExternalLink className="w-3 h-3" />
                             </a>
                           )}
@@ -918,20 +1030,20 @@ export default function AnalyzePage() {
                   className="text-xs font-semibold text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-1"
                 >
                   {showTechnicalDetails ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                  <span>{showTechnicalDetails ? 'Hide' : 'Show'} Extracted Entities & Execution Pipeline</span>
+                  <span>{showTechnicalDetails ? t('analyze.hide_tech', 'Hide Extracted Entities & Execution Pipeline') : t('analyze.show_tech', 'Show Extracted Entities & Execution Pipeline')}</span>
                 </button>
 
                 {showTechnicalDetails && (
                   <div className="mt-3 p-4 rounded-xl bg-slate-900 text-slate-200 text-xs font-mono space-y-3">
                     <div>
-                      <span className="text-emerald-400 font-bold">Models & Engines Executed:</span>
+                      <span className="text-emerald-400 font-bold">{t('analyze.models_executed', 'Models & Engines Executed:')}</span>
                       <p>{result.models_used.join(', ')}</p>
                     </div>
 
                     <div>
-                      <span className="text-emerald-400 font-bold">Extracted Entities (NER Spans):</span>
+                      <span className="text-emerald-400 font-bold">{t('analyze.extracted_entities', 'Extracted Entities (NER Spans):')}</span>
                       {result.entities.length === 0 ? (
-                        <p className="text-slate-400">None extracted.</p>
+                        <p className="text-slate-400">{t('analyze.none_extracted', 'None extracted.')}</p>
                       ) : (
                         <ul className="list-disc pl-4 space-y-0.5">
                           {result.entities.map((e, idx) => (

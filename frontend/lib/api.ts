@@ -131,6 +131,8 @@ export async function fetchHealth() {
   return res.json();
 }
 
+import { FALLBACK_SCHEMES } from './fallbackSchemes';
+
 export async function fetchSchemes(params?: { q?: string; level?: string; state?: string; category?: string; limit?: number; offset?: number }) {
   const query = new URLSearchParams();
   if (params?.q) query.append("q", params.q);
@@ -140,15 +142,57 @@ export async function fetchSchemes(params?: { q?: string; level?: string; state?
   if (params?.limit) query.append("limit", params.limit.toString());
   if (params?.offset) query.append("offset", params.offset.toString());
 
-  const res = await fetch(`${API_BASE}/schemes?${query.toString()}`);
-  if (!res.ok) throw new Error("Failed to fetch schemes");
-  return res.json() as Promise<{ total: number; limit: number; offset: number; schemes: Scheme[] }>;
+  try {
+    const res = await fetch(`${API_BASE}/schemes?${query.toString()}`);
+    if (res.ok) {
+      return await res.json() as { total: number; limit: number; offset: number; schemes: Scheme[] };
+    }
+  } catch (e) {
+    console.warn("fetchSchemes remote failed, using local offline schemes", e);
+  }
+
+  // Resilient fallback so schemes tab is NEVER empty even if backend is offline
+  let filtered = [...FALLBACK_SCHEMES];
+  if (params?.level) {
+    filtered = filtered.filter(s => s.level.toLowerCase() === params.level?.toLowerCase());
+  }
+  if (params?.state) {
+    filtered = filtered.filter(s => s.state.toLowerCase().includes(params.state!.toLowerCase()));
+  }
+  if (params?.category) {
+    filtered = filtered.filter(s => (s.categories || '').toLowerCase().includes(params.category!.toLowerCase()));
+  }
+  if (params?.q) {
+    const qL = params.q.toLowerCase();
+    filtered = filtered.filter(s =>
+      s.name.toLowerCase().includes(qL) ||
+      (s.details || '').toLowerCase().includes(qL) ||
+      (s.eligibility || '').toLowerCase().includes(qL)
+    );
+  }
+  const offset = params?.offset || 0;
+  const limit = params?.limit || 50;
+  return {
+    total: filtered.length,
+    limit,
+    offset,
+    schemes: filtered.slice(offset, offset + limit)
+  };
 }
 
 export async function fetchSchemeDetail(schemeId: string) {
-  const res = await fetch(`${API_BASE}/schemes/${schemeId}`);
-  if (!res.ok) throw new Error(`Scheme ${schemeId} not found`);
-  return res.json() as Promise<Scheme>;
+  try {
+    const res = await fetch(`${API_BASE}/schemes/${schemeId}`);
+    if (res.ok) {
+      return await res.json() as Scheme;
+    }
+  } catch (e) {
+    console.warn(`fetchSchemeDetail remote failed for ${schemeId}, using fallback`, e);
+  }
+
+  const match = FALLBACK_SCHEMES.find(s => s.scheme_id === schemeId);
+  if (match) return match;
+  throw new Error(`Scheme ${schemeId} not found`);
 }
 
 export async function analyzeCase(payload: AnalyzeRequest): Promise<AnalyzeResponse> {
@@ -158,7 +202,7 @@ export async function analyzeCase(payload: AnalyzeRequest): Promise<AnalyzeRespo
     body: JSON.stringify(payload)
   });
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: "Analysis request failed" }));
+    const err = await res.json().catch(() => ({ detail: "Backend connection error. Please make sure the FastAPI server is running on http://127.0.0.1:8000." }));
     throw new Error(err.detail || "Analysis failed");
   }
   return res.json();

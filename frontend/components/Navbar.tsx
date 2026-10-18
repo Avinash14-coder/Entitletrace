@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ShieldCheck, Sun, Moon, Languages, Menu, X } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
-  const [lang, setLang] = useState('en');
+  const { lang, setLang, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -34,11 +35,11 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: '/', label: lang === 'hi' ? 'मुख्य पृष्ठ' : lang === 'mr' ? 'मुख्य पृष्ठ' : 'Home' },
-    { href: '/analyze', label: lang === 'hi' ? 'विश्लेषण करें' : lang === 'mr' ? 'अर्जाचे विश्लेषण' : 'Analyze Case' },
-    { href: '/schemes', label: lang === 'hi' ? 'योजनाएं' : lang === 'mr' ? 'योजना शोध' : 'Scheme Explorer' },
-    { href: '/insights', label: lang === 'hi' ? 'डैशबोर्ड' : lang === 'mr' ? 'आकडेवारी' : 'Insights & Analytics' },
-    { href: '/about', label: lang === 'hi' ? 'परिचय' : lang === 'mr' ? 'माहिती' : 'About' },
+    { href: '/', label: t('nav.home', 'Home') },
+    { href: '/analyze', label: t('nav.analyze', 'Analyze Case') },
+    { href: '/schemes', label: t('nav.schemes', 'Scheme Explorer') },
+    { href: '/insights', label: t('nav.insights', 'Insights & Analytics') },
+    { href: '/about', label: t('nav.about', 'About') },
   ];
 
   return (
