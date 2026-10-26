@@ -4,15 +4,18 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import NMF
 
+from backend.app.core.paths import get_path
+
 SYNTHETIC_CASES_PATH = "data/synthetic/cases.jsonl"
 
 def extract_topics(num_topics: int = 5, top_n_terms: int = 6) -> list[dict]:
-    if not os.path.exists(SYNTHETIC_CASES_PATH):
+    cases_file = get_path(SYNTHETIC_CASES_PATH)
+    if not os.path.exists(cases_file):
         return []
 
     remarks = []
     cases_map = []
-    with open(SYNTHETIC_CASES_PATH, "r", encoding="utf-8") as f:
+    with open(cases_file, "r", encoding="utf-8") as f:
         for line in f:
             if line.strip():
                 item = json.loads(line)

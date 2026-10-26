@@ -4,12 +4,15 @@ import json
 import pandas as pd
 from backend.app.nlp.topics import extract_topics
 
+from backend.app.core.paths import get_path
+
 router = APIRouter(prefix="/v1/analytics", tags=["Analytics"])
 SYNTHETIC_CASES_PATH = "data/synthetic/cases.jsonl"
 
 @router.get("/failures")
 def get_failure_analytics():
-    if not os.path.exists(SYNTHETIC_CASES_PATH):
+    cases_file = get_path(SYNTHETIC_CASES_PATH)
+    if not os.path.exists(cases_file):
         return {"total_cases": 0, "by_failure_type": {}, "by_language": {}, "by_scheme": {}}
 
     failures = {}
@@ -17,7 +20,7 @@ def get_failure_analytics():
     schemes = {}
     total = 0
 
-    with open(SYNTHETIC_CASES_PATH, "r", encoding="utf-8") as f:
+    with open(cases_file, "r", encoding="utf-8") as f:
         for line in f:
             if line.strip():
                 item = json.loads(line)

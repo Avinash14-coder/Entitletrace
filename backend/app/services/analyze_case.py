@@ -1,5 +1,6 @@
 import yaml
 import os
+from backend.app.core.paths import get_path
 from backend.app.nlp.lang import detect_language
 from backend.app.nlp.ner import get_ner_extractor
 from backend.app.nlp.classifier import get_classifier
@@ -9,8 +10,9 @@ from backend.app.rules.engine import RuleEngine
 TAXONOMY_PATH = "config/taxonomy.yaml"
 
 def load_taxonomy():
-    if os.path.exists(TAXONOMY_PATH):
-        with open(TAXONOMY_PATH, "r", encoding="utf-8") as f:
+    tax_file = get_path(TAXONOMY_PATH)
+    if os.path.exists(tax_file):
+        with open(tax_file, "r", encoding="utf-8") as f:
             return yaml.safe_load(f).get("taxonomies", {})
     return {}
 
@@ -56,10 +58,17 @@ class AnalysisService:
                     rule_failed_details = {"document_type": "Income Certificate", "max_age_days": "365"}
                 elif first_failed["type"] == "documents_present":
                     rule_failed_label = "missing_document"
-                    rule_failed_details = {"missing_docs": first_failed.get("actual", "required document")}
+                    clean_missing = first_failed.get("actual", "required document").replace("Missing: ", "")
+                    rule_failed_details = {"missing_docs": clean_missing}
                 elif first_failed["type"] in ["numeric_min", "numeric_range"] and "age" in first_failed["rule_id"]:
                     rule_failed_label = "eligibility_age"
                     rule_failed_details = {"min_age": "18", "max_age": "35"}
+                elif first_failed["type"] in ["category_in", "state_in"]:
+                    rule_failed_label = "eligibility_category_or_residence"
+                    rule_failed_details = {
+                        "required_state": first_failed.get("expected", "designated state").replace("One of ", ""),
+                        "required_category": first_failed.get("expected", "eligible category").replace("One of ", "")
+                    }
 
         # 4. Classifier Prediction
         clf_result = self.classifier.predict(remark_text)
@@ -94,6 +103,8 @@ class AnalysisService:
         action_text = action_text.replace("{{document_type}}", rule_failed_details.get("document_type", "Income Certificate"))
         action_text = action_text.replace("{{missing_docs}}", rule_failed_details.get("missing_docs", "required document"))
         action_text = action_text.replace("{{min_age}}", "18").replace("{{max_age}}", "35")
+        action_text = action_text.replace("{{required_state}}", rule_failed_details.get("required_state", "Maharashtra"))
+        action_text = action_text.replace("{{required_category}}", rule_failed_details.get("required_category", "eligible category"))
 
         return {
             "scheme_id": scheme_id,

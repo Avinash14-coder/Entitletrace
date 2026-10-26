@@ -3,15 +3,16 @@ import re
 import pickle
 import numpy as np
 from rank_bm25 import BM25Okapi
+from backend.app.core.paths import get_path
 
-INDEX_DIR = "data/index"
+INDEX_DIR = get_path("data/index")
 
 def tokenize(text: str) -> list[str]:
     return [w.lower() for w in re.findall(r'\w+', text)]
 
 class ClauseRetriever:
-    def __init__(self, index_dir: str = INDEX_DIR):
-        self.index_dir = index_dir
+    def __init__(self, index_dir: str = None):
+        self.index_dir = index_dir or INDEX_DIR
         self.bm25 = None
         self.tfidf = None
         self.tfidf_matrix = None

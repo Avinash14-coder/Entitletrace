@@ -1,0 +1,956 @@
+[
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_ELIG_1",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant must belong to Scheduled Caste (SC) category.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_ELIG_2",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Applicant must be a permanent resident of India.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_ELIG_3",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "eligibility",
+    "order": 3,
+    "text": "The annual income of applicant's parents/guardian from all sources must not exceed ₹2,500,000 (₹2.5 Lakh) per annum.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_ELIG_4",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Applicant must be pursuing recognized post-matriculation courses in approved institutions.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_ELIG_5",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "eligibility",
+    "order": 5,
+    "text": "Age must be between 16 and 35 years at time of application.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_DOCU_1",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "documents",
+    "order": 1,
+    "text": "Valid Income Certificate issued by competent authority (Max 1 year old). SC Caste Certificate issued by competent magistrate. Aadhaar Card linked with active bank account. Previous year Marksheet / Passing Certificate.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_DOCU_2",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "documents",
+    "order": 2,
+    "text": "Bank Passbook copy showing IFSC and Account Number. Institution Fee Receipt.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_PROC_1",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "process",
+    "order": 1,
+    "text": "Register on National Scholarship Portal (NSP) or State Scholarship Portal.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_PROC_2",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "process",
+    "order": 2,
+    "text": "Upload income certificate, caste certificate, and academic marksheets.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_PROC_3",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "process",
+    "order": 3,
+    "text": "Submit application online before the deadline of 31st October. Institution verification followed by district officer approval.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_SC_BENE_1",
+    "scheme_id": "SCH_POST_MATRIC_SC",
+    "scheme_name": "Post Matric Scholarship for SC Students",
+    "section": "benefits",
+    "order": 1,
+    "text": "Full tuition fee reimbursement and maintenance allowance ranging from ₹2,500 to ₹13,500 per annum based on course category.",
+    "source_url": "https://scholarships.gov.in/pms-sc"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_ELIG_1",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant farmer family must own cultivable land registered in their name. Both small and marginal farmers are eligible.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_ELIG_2",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Institutional landholders, serving/retired government employees, and income tax payers in last assessment year are ineligible. Applicant must have completed mandatory e-KYC.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_DOCU_1",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "documents",
+    "order": 1,
+    "text": "Land Ownership Document (7/12 extract / Khatauni / Jamabandi). Aadhaar Card of head of family. Aadhaar-seeded Bank Account details. Active Mobile Number for e-KYC OTP verification.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_PROC_1",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "process",
+    "order": 1,
+    "text": "Apply via PM-KISAN online portal or CSC center.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_PROC_2",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "process",
+    "order": 2,
+    "text": "Enter land record (Khata/Khasra) details and Aadhaar number.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_PROC_3",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "process",
+    "order": 3,
+    "text": "Complete land seeding verification by local Revenue Officer.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_KISAN_BENE_1",
+    "scheme_id": "SCH_PM_KISAN",
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "section": "benefits",
+    "order": 1,
+    "text": "Financial benefit of ₹6,000 per year transferred in three equal instalments of ₹2,000 every four months directly into bank accounts.",
+    "source_url": "https://pmkisan.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_ELIG_1",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Beneficiary family should not own a pucca house anywhere in India.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_ELIG_2",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Annual family income for EWS category must not exceed ₹3,000,000 (₹3 Lakh).",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_ELIG_3",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "eligibility",
+    "order": 3,
+    "text": "Annual family income for LIG category must not exceed ₹6,000,000 (₹6 Lakh).",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_ELIG_4",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Family must comprise husband, wife, and unmarried children.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_DOCU_1",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "documents",
+    "order": 1,
+    "text": "Income Certificate showing annual family income ≤ ₹300,000 for EWS. Aadhaar Card of all family members. Domicile / Residence Proof of urban area. Land Ownership proof or allotment letter.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_DOCU_2",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "documents",
+    "order": 2,
+    "text": "Affidavit affirming no ownership of pucca house anywhere in India.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_PROC_1",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "process",
+    "order": 1,
+    "text": "Apply online at PMAY-U official portal or through Urban Local Body (ULB). Submit income certificate, land documents, and Aadhaar.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_PROC_2",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "process",
+    "order": 2,
+    "text": "Verification by Municipal Corporation / ULB inspection team.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_PMAY_URBAN_BENE_1",
+    "scheme_id": "SCH_PMAY_URBAN",
+    "scheme_name": "Pradhan Mantri Awas Yojana - Urban",
+    "section": "benefits",
+    "order": 1,
+    "text": "Interest subsidy up to ₹2.67 Lakh on housing loans or direct financial assistance of ₹1.5 Lakh for house construction.",
+    "source_url": "https://pmaymis.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_ELIG_1",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant must be a permanent woman resident of Maharashtra State.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_ELIG_2",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Age of applicant must be between 21 and 65 years.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_ELIG_3",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "eligibility",
+    "order": 3,
+    "text": "Total annual family income from all sources must not exceed ₹2,50,000 (₹2.5 Lakh).",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_ELIG_4",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Applicant must possess a valid Yellow or Orange Ration Card, or annual income certificate below limit.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_ELIG_5",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "eligibility",
+    "order": 5,
+    "text": "No member of applicant family should be an Income Tax payer or permanent government employee.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_DOCU_1",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "documents",
+    "order": 1,
+    "text": "Aadhaar Card of applicant woman.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_DOCU_2",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "documents",
+    "order": 2,
+    "text": "Domicile Certificate of Maharashtra (or Ration Card / Voter ID proving 15 years residence).",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_DOCU_3",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "documents",
+    "order": 3,
+    "text": "Income Certificate (Max 1 year old) OR Yellow/Orange Ration Card copy. Bank Passbook copy (Aadhaar linked, single account). Self-declaration affidavit regarding non-payment of income tax.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_PROC_1",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "process",
+    "order": 1,
+    "text": "Submit application through Nari Shakti Doot App or Anganwadi center.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_PROC_2",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "process",
+    "order": 2,
+    "text": "Upload Aadhaar, Domicile certificate / Ration card, and Bank passbook. Scrutiny by Gram Panchayat / Ward committee.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_MAJHI_LADKI_BAHIN_BENE_1",
+    "scheme_id": "SCH_MAJHI_LADKI_BAHIN",
+    "scheme_name": "Mukhyamantri Majhi Ladki Bahin Yojana",
+    "section": "benefits",
+    "order": 1,
+    "text": "Monthly financial assistance of ₹1,500 directly deposited into Aadhaar-linked bank accounts.",
+    "source_url": "https://ladkibahin.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_SVANIDHI_ELIG_1",
+    "scheme_id": "SCH_PM_SVANIDHI",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant must be a street vendor vending in urban areas on or before 24th March 2020.",
+    "source_url": "https://pmsvanidhi.mohua.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_SVANIDHI_ELIG_2",
+    "scheme_id": "SCH_PM_SVANIDHI",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Must possess Certificate of Vending / Identity Card issued by Urban Local Bodies (ULB).",
+    "source_url": "https://pmsvanidhi.mohua.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_SVANIDHI_ELIG_3",
+    "scheme_id": "SCH_PM_SVANIDHI",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "section": "eligibility",
+    "order": 3,
+    "text": "In case of non-card vendors, Letter of Recommendation (LoR) from ULB / Town Vending Committee (TVC) is required. Age must be at least 18 years.",
+    "source_url": "https://pmsvanidhi.mohua.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_SVANIDHI_DOCU_1",
+    "scheme_id": "SCH_PM_SVANIDHI",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "section": "documents",
+    "order": 1,
+    "text": "Certificate of Vending (CoV) OR Town Vending Committee ID OR Letter of Recommendation (LoR). Aadhaar Card. Bank Account details. Mobile number linked with Aadhaar.",
+    "source_url": "https://pmsvanidhi.mohua.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_SVANIDHI_PROC_1",
+    "scheme_id": "SCH_PM_SVANIDHI",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "section": "process",
+    "order": 1,
+    "text": "Apply through PM SVANidhi portal or CSC center. Select lending institution (bank/NBFC). Upload Vending Certificate / LoR and Aadhaar.",
+    "source_url": "https://pmsvanidhi.mohua.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_SVANIDHI_BENE_1",
+    "scheme_id": "SCH_PM_SVANIDHI",
+    "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi",
+    "section": "benefits",
+    "order": 1,
+    "text": "First tranche working capital loan up to ₹10,000 (1-year tenure), second tranche up to ₹20,000, and third tranche up to ₹50,000 with 7% interest subsidy.",
+    "source_url": "https://pmsvanidhi.mohua.gov.in"
+  },
+  {
+    "clause_id": "SCH_NMMS_ELIG_1",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Student must be studying as a regular student in Class VIII in a Government, Government-Aided, or Local Body school.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_ELIG_2",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Student must have scored minimum 55% marks (50% for SC/ST) in Class VII examination.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_ELIG_3",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "eligibility",
+    "order": 3,
+    "text": "Parental annual income from all sources must not exceed ₹3,50,000 (₹3.5 Lakh).",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_ELIG_4",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Students of Navodaya, Kendriya Vidyalaya, and Sainik schools are not eligible.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_DOCU_1",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "documents",
+    "order": 1,
+    "text": "Class VII Marksheet showing minimum 55% (50% for SC/ST) marks.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_DOCU_2",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "documents",
+    "order": 2,
+    "text": "Parental Income Certificate issued by Tahsildar / Gazetted Officer (Max 1 year old). Caste Certificate (if applicable for SC/ST). Disability Certificate (if applicable, min 40%). Aadhaar Card and Bank Account details.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_PROC_1",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "process",
+    "order": 1,
+    "text": "Appear for NMMS Selection Test conducted by State Education Department.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_PROC_2",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "process",
+    "order": 2,
+    "text": "Qualify the written exam (MAT and SAT papers).",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_PROC_3",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "process",
+    "order": 3,
+    "text": "Apply on NSP portal with exam roll number and income certificate.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_NMMS_BENE_1",
+    "scheme_id": "SCH_NMMS",
+    "scheme_name": "National Means-cum-Merit Scholarship Scheme",
+    "section": "benefits",
+    "order": 1,
+    "text": "Scholarship of ₹12,000 per annum (₹1,000 per month) for selected students studying in class IX to XII.",
+    "source_url": "https://dsel.education.gov.in/scheme/nmmss"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_ELIG_1",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Households identified under SECC 2011 data, active Ration Card holders under NFSA, or Senior Citizens aged 70 years and above (Vaya Vandana Card).",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_ELIG_2",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "eligibility",
+    "order": 2,
+    "text": "No restriction on family size, age or gender. Pre-existing conditions covered from day one.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_DOCU_1",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "documents",
+    "order": 1,
+    "text": "Aadhaar Card of beneficiary.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_DOCU_2",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "documents",
+    "order": 2,
+    "text": "Ration Card (NFSA / State Priority Family Card). Active Mobile Number.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_PROC_1",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "process",
+    "order": 1,
+    "text": "Check eligibility on PMJAY beneficiary portal or Ayushman App.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_PROC_2",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "process",
+    "order": 2,
+    "text": "Visit Ayushman Mitra at empanelled hospital or CSC.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_PROC_3",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "process",
+    "order": 3,
+    "text": "Complete e-KYC using Aadhaar and generate Ayushman Card.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_AYUSHMAN_BHARAT_BENE_1",
+    "scheme_id": "SCH_AYUSHMAN_BHARAT",
+    "scheme_name": "Ayushman Bharat PM Jan Arogya Yojana",
+    "section": "benefits",
+    "order": 1,
+    "text": "Cashless health cover of up to ₹5,00,000 (₹5 Lakh) per family per year for secondary and tertiary care hospitalization across empanelled public and private hospitals.",
+    "source_url": "https://pmjay.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_ELIG_1",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Girl child and family must be permanent residents of Uttar Pradesh.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_ELIG_2",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Family annual income from all sources must not exceed ₹3,00,000 (₹3 Lakh).",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_ELIG_3",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "eligibility",
+    "order": 3,
+    "text": "Maximum two girl children per family are eligible.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_ELIG_4",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Application for birth stage must be filed within 6 months of girl child birth.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_DOCU_1",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "documents",
+    "order": 1,
+    "text": "Birth Certificate of girl child.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_DOCU_2",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "documents",
+    "order": 2,
+    "text": "Domicile Certificate of Uttar Pradesh (or Voter ID / Electricity bill).",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_DOCU_3",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "documents",
+    "order": 3,
+    "text": "Income Certificate of parents (Max 1 year old, ceiling ₹3,00,000). Aadhaar Card of mother/father and girl child. Joint photograph of girl child with parents. Bank Passbook copy of parent/guardian.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_PROC_1",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "process",
+    "order": 1,
+    "text": "Register on mksy.up.gov.in portal.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_PROC_2",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "process",
+    "order": 2,
+    "text": "Select application stage (Stage 1 to Stage 6).",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_PROC_3",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "process",
+    "order": 3,
+    "text": "Upload birth certificate, immunization record, or school admission proof.",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_KANYA_SUMANGALA_BENE_1",
+    "scheme_id": "SCH_KANYA_SUMANGALA",
+    "scheme_name": "Mukhyamantri Kanya Sumangala Yojana",
+    "section": "benefits",
+    "order": 1,
+    "text": "Total financial assistance of ₹25,000 distributed across 6 stages: birth (₹5,000), complete vaccination (₹2,000), Class 1 (₹3,000), Class 6 (₹3,000), Class 9 (₹5,000), and Degree/Diploma admission (₹7,000).",
+    "source_url": "https://mksy.up.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_EGBUS_ELIG_1",
+    "scheme_id": "SCH_PM_EGBUS",
+    "scheme_name": "PM-eBus Sewa Scheme",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Municipal Corporations and Urban Local Bodies in eligible cities. Cities without organized bus service receive priority.",
+    "source_url": "https://mohua.gov.in/ebus"
+  },
+  {
+    "clause_id": "SCH_PM_EGBUS_DOCU_1",
+    "scheme_id": "SCH_PM_EGBUS",
+    "scheme_name": "PM-eBus Sewa Scheme",
+    "section": "documents",
+    "order": 1,
+    "text": "City Mobility Plan document. Municipal Council Resolution.",
+    "source_url": "https://mohua.gov.in/ebus"
+  },
+  {
+    "clause_id": "SCH_PM_EGBUS_PROC_1",
+    "scheme_id": "SCH_PM_EGBUS",
+    "scheme_name": "PM-eBus Sewa Scheme",
+    "section": "process",
+    "order": 1,
+    "text": "State government submits proposal to MoHUA. Agreement signed with concessionaire.",
+    "source_url": "https://mohua.gov.in/ebus"
+  },
+  {
+    "clause_id": "SCH_PM_EGBUS_BENE_1",
+    "scheme_id": "SCH_PM_EGBUS",
+    "scheme_name": "PM-eBus Sewa Scheme",
+    "section": "benefits",
+    "order": 1,
+    "text": "Clean, reliable electric public transport services with subsidy support for bus acquisition and charging infrastructure.",
+    "source_url": "https://mohua.gov.in/ebus"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_ELIG_1",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant must be SC/ST and/or Woman entrepreneur above 18 years of age.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_ELIG_2",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Loans under the scheme are available for greenfield enterprises only (first-time venture).",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_ELIG_3",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "eligibility",
+    "order": 3,
+    "text": "In non-individual enterprises, 51% of shareholding and controlling stake must be held by SC/ST or Woman entrepreneur.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_ELIG_4",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Borrower should not be in default to any bank or financial institution.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_DOCU_1",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "documents",
+    "order": 1,
+    "text": "SC/ST Caste Certificate (if applicable).",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_DOCU_2",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "documents",
+    "order": 2,
+    "text": "Identity & Address Proof (Aadhaar, PAN Card, Voter ID). Project Report / Detailed Business Plan.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_DOCU_3",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "documents",
+    "order": 3,
+    "text": "Rent Agreement / Land Ownership proof for business premise. Bank statement for last 6 months.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_PROC_1",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "process",
+    "order": 1,
+    "text": "Apply online at standupmitra.in portal.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_PROC_2",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "process",
+    "order": 2,
+    "text": "Submit project report, business plan, and KYC documents. Lead district manager/bank branch review.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_STANDUP_INDIA_BENE_1",
+    "scheme_id": "SCH_STANDUP_INDIA",
+    "scheme_name": "Stand-Up India Scheme for SC/ST and Women Entrepreneurs",
+    "section": "benefits",
+    "order": 1,
+    "text": "Bank loan ranging from ₹10,00,000 to ₹1,00,00,000 for manufacturing, services, agriculture-allied, or trading sector.",
+    "source_url": "https://www.standupmitra.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_ELIG_1",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant artisan must be working with hands and tools in one of 18 family-based traditional trades.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_ELIG_2",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Minimum age of applicant must be 18 years on date of registration. Benefit restricted to one member per family.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_ELIG_3",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "eligibility",
+    "order": 3,
+    "text": "Applicant should not have availed credit under similar government credit schemes (PMEGP, PM SVANidhi, Mudra) in last 5 years.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_DOCU_1",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "documents",
+    "order": 1,
+    "text": "Aadhaar Card of artisan. Aadhaar-linked Bank Account Passbook. Active Mobile Number.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_DOCU_2",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "documents",
+    "order": 2,
+    "text": "Trade verification recommendation by Local Sarpanch / Ward Member.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_PROC_1",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "process",
+    "order": 1,
+    "text": "Register at Common Service Centre (CSC) via PM Vishwakarma portal.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_PROC_2",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "process",
+    "order": 2,
+    "text": "Three-step verification: Gram Panchayat / ULB level, District Implementation Committee, and Screening Committee.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_PM_VISHWAKARMA_BENE_1",
+    "scheme_id": "SCH_PM_VISHWAKARMA",
+    "scheme_name": "PM Vishwakarma Scheme",
+    "section": "benefits",
+    "order": 1,
+    "text": "Recognition via Vishwakarma Certificate & ID Card, basic 5-7 days skill training with ₹500/day stipend, ₹15,000 Tool Kit Incentive, and collateral-free loan up to ₹3 Lakh at 5% interest.",
+    "source_url": "https://pmvishwakarma.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_ELIG_1",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "eligibility",
+    "order": 1,
+    "text": "Applicant must belong to OBC category of Maharashtra State.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_ELIG_2",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "eligibility",
+    "order": 2,
+    "text": "Annual family income must not exceed ₹1,50,000 (₹1.5 Lakh) for scholarship, or ₹8,00,000 (₹8 Lakh) for tuition fee reimbursement.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_ELIG_3",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "eligibility",
+    "order": 3,
+    "text": "Student must be enrolled in recognized post-matric course via CAP / merit round.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_ELIG_4",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "eligibility",
+    "order": 4,
+    "text": "Minimum 75% attendance required in current academic year.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_DOCU_1",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "documents",
+    "order": 1,
+    "text": "Valid Income Certificate issued by Tahsildar (Max 1 year old, showing income ≤ ₹1.5 Lakh).",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_DOCU_2",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "documents",
+    "order": 2,
+    "text": "OBC Caste Certificate issued by competent authority in Maharashtra.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_DOCU_3",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "documents",
+    "order": 3,
+    "text": "Non-Creamy Layer Certificate valid for current financial year. Domicile Certificate of Maharashtra. Previous year Passed Marksheet. Aadhaar Card linked with NPCI bank account.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_PROC_1",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "process",
+    "order": 1,
+    "text": "Apply via MahaDBT portal (mahadbt.maharashtra.gov.in).",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_PROC_2",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "process",
+    "order": 2,
+    "text": "Upload income certificate, caste certificate, non-creamy layer certificate.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_PROC_3",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "process",
+    "order": 3,
+    "text": "Verification by College Principal and Social Welfare Officer.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  },
+  {
+    "clause_id": "SCH_POST_MATRIC_OBC_BENE_1",
+    "scheme_id": "SCH_POST_MATRIC_OBC",
+    "scheme_name": "Post Matric Scholarship for OBC Students",
+    "section": "benefits",
+    "order": 1,
+    "text": "50% to 100% tuition fee and exam fee waiver plus maintenance allowance depending on course tier.",
+    "source_url": "https://mahadbt.maharashtra.gov.in"
+  }
+]

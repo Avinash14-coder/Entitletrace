@@ -32,10 +32,12 @@ app.include_router(extract_router)
 app.include_router(analytics_router)
 app.include_router(taxonomy_router)
 
+from backend.app.core.paths import get_path
+
 @app.get("/v1/health", tags=["Health"])
 def health_check():
-    index_exists = os.path.exists("data/index/bm25.pkl")
-    schemes_exist = os.path.exists("data/processed/schemes.parquet")
+    index_exists = os.path.exists(get_path("data/index/bm25.pkl"))
+    schemes_exist = os.path.exists(get_path("data/processed/schemes.parquet"))
     
     return {
         "status": "ok",

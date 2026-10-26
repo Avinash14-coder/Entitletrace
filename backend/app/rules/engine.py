@@ -3,13 +3,16 @@ from datetime import datetime, date
 import yaml
 import os
 
+from backend.app.core.paths import get_path
+
 DEMO_SCHEMES_PATH = "config/demo_schemes.yaml"
 
 class RuleEngine:
-    def __init__(self, demo_rules_path: str = DEMO_SCHEMES_PATH):
+    def __init__(self, demo_rules_path: str = None):
         self.rules_by_scheme = {}
-        if os.path.exists(demo_rules_path):
-            with open(demo_rules_path, 'r', encoding='utf-8') as f:
+        rules_path = get_path(demo_rules_path or DEMO_SCHEMES_PATH)
+        if os.path.exists(rules_path):
+            with open(rules_path, 'r', encoding='utf-8') as f:
                 data = yaml.safe_load(f) or {}
                 for sch in data.get("demo_schemes", []):
                     self.rules_by_scheme[sch["scheme_id"]] = sch.get("rules", [])

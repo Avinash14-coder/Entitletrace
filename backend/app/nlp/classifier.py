@@ -6,13 +6,15 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
-MODEL_DIR = "models"
-CLASSIFIER_PATH = os.path.join(MODEL_DIR, "baseline_classifier.pkl")
-SYNTHETIC_CASES_PATH = "data/synthetic/cases.jsonl"
+from backend.app.core.paths import get_path
+
+MODEL_DIR = get_path("models")
+CLASSIFIER_PATH = get_path("models/baseline_classifier.pkl")
+SYNTHETIC_CASES_PATH = get_path("data/synthetic/cases.jsonl")
 
 class FailureClassifier:
-    def __init__(self, model_path: str = CLASSIFIER_PATH):
-        self.model_path = model_path
+    def __init__(self, model_path: str = None):
+        self.model_path = model_path or CLASSIFIER_PATH
         self.vectorizer = None
         self.clf = None
         self.classes_ = []
