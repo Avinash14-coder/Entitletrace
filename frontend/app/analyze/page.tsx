@@ -149,7 +149,7 @@ const DEFAULT_SCHEMES: Scheme[] = [
   { scheme_id: 'SCH_PM_SVANIDHI', name: "PM Street Vendor's AtmaNirbhar Nidhi", level: 'Central', state: 'All India' },
 ];
 
-export default function AnalyzePage() {
+function AnalyzePageContent() {
   const searchParams = useSearchParams();
   const demoParam = searchParams.get('demo');
   const modeParam = searchParams.get('mode');
@@ -1065,3 +1065,19 @@ export default function AnalyzePage() {
     </div>
   );
 }
+
+export default function AnalyzePage() {
+  return (
+    <React.Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center p-8 text-slate-500">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm font-medium">Loading analysis engine...</p>
+        </div>
+      </div>
+    }>
+      <AnalyzePageContent />
+    </React.Suspense>
+  );
+}
+

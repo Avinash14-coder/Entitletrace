@@ -87,9 +87,11 @@ export interface Scheme {
   scheme_id: string;
   name: string;
   short_name?: string;
+  scheme_short_name?: string;
   level: string;
   state: string;
   ministry_name?: string;
+  nodal_agency?: string;
   categories?: string;
   target_group?: string;
   benefit_type?: string;
@@ -98,8 +100,15 @@ export interface Scheme {
   eligibility?: string;
   application_process?: string;
   documents_required?: string;
+  faqs?: string;
   source_url?: string;
+  tags?: string;
+  gender_eligibility?: string;
+  min_age?: number;
+  max_age?: number;
+  max_income?: number;
   clauses?: LinkedClause[];
+  [key: string]: any;
 }
 
 export interface FailureAnalytics {
@@ -123,7 +132,9 @@ export interface TopicAnalytics {
   topics: TopicItem[];
 }
 
-const API_BASE = typeof window === 'undefined' ? 'http://127.0.0.1:8000/v1' : '/api/v1';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://entitletrace.onrender.com';
+const API_BASE = typeof window === 'undefined' ? `${BACKEND_URL}/v1` : '/api/v1';
+
 
 export async function fetchHealth() {
   const res = await fetch(`${API_BASE}/health`);
@@ -202,7 +213,7 @@ export async function analyzeCase(payload: AnalyzeRequest): Promise<AnalyzeRespo
     body: JSON.stringify(payload)
   });
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: "Backend connection error. Please make sure the FastAPI server is running on http://127.0.0.1:8000." }));
+    const err = await res.json().catch(() => ({ detail: "Backend connection error. Please make sure the EntitleTrace backend is reachable." }));
     throw new Error(err.detail || "Analysis failed");
   }
   return res.json();
